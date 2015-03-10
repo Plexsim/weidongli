@@ -1,0 +1,41 @@
+{template 'common/header'}
+<style>
+.field label{float:left;margin:0 !important; width:140px;}
+</style>
+<ul class="nav nav-tabs">
+	<li class="active"><a href="{php echo create_url('site/module/list', array('name' => 'quanjing'));}">全景列表</a></li>
+    <li class=""><a href="{php echo create_url('site/module/create', array('name' => 'quanjing'));}">创建3D全景</a></li>
+    <li class=""><a href="{php echo create_url('site/module/set', array('name' => 'quanjing'));}">全景配置</a></li>
+</ul>
+<div class="main">
+	<div class="stat">
+		<div class="stat-div">
+			<div class="sub-item" id="table-list">
+				<div class="sub-content">
+					<table class="table table-hover">
+						<thead class="navbar-inner">
+							<tr>
+								<th align="center" class="row-hover" style="width:60px;">全景名称</th>
+								<th style="width:80px;">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							{loop $list $row}
+							<tr>
+								<td align="center" class="row-hover"><a href="#" title="{$row['realname']}">{$row['title']}</a></td>
+								<td>
+                                <a href="{php echo create_url('index/module/edit', array('name' => 'quanjing','weid' => $row['weid'],'sid'=>$row['sid']));}">编辑</a>|
+                                <a href="{php echo create_url('index/module/del', array('name' => 'quanjing','weid' => $row['weid'],'sid'=>$row['sid']));}">删除</a>|
+                                <a href="{php echo create_url('index/module/view', array('name' => 'quanjing','weid' => $row['weid'],'sid'=>$row['sid']));}" target="_blank">预览</a>
+                                </td>
+							</tr>
+							{/loop}
+						</tbody>
+					</table>
+				</div>
+				{$pager}
+			</div>
+		</div>
+	</div>
+</div>
+{template 'common/footer'}

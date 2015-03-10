@@ -1,0 +1,20 @@
+  <div class="main">
+    <ul class="app-list clearfix" data-placeholderimg="http://img1.sj.qq.com/res/static/myapp/assets/images/common/placeHolderImg.gif">
+      <?php for ($i=0; $i < 1; $i++) { ?>
+{loop $list $item}
+      <li>
+          <div class="app-info clearfix">
+            <a href="{php echo $this->createWebUrl('AppDetail', array('id'=>$item->id))}" class="app-info-icon" hidefocus="true"><img data-original="{php echo $item->thumb}" style="display: block; background-image: url(http://img1.sj.qq.com/res/static/myapp/assets/images/common/placeHolderImg.gif);" width="64" height="64" src="{php echo $item->thumb}"></a>
+            <div class="app-info-desc">
+              <a href="{php echo $this->createWebUrl('AppDetail', array('id'=>$item->id))}" class="name ofh" hidefocus="true">{php echo $item->title}</a>
+              <span class="size">作者：{if empty($item->author)}佚名{else}{php echo $item->author}{/if}</span>
+              <span class="download">{php echo date('m月d日',$item->createtime)}更新</span>
+              <a title="已经购买者可直接更新" class="com-install-btn" href="{php echo $this->createWebUrl('Install', array('appid'=>$item->id, 'url'=>$item->url, 'rand'=>TIMESTAMP))}">{php echo $item->price > 0 ? $item->price .'元' : '限免'}安装</a>
+            </div>
+          </div>
+          </li>
+          {/loop}
+          <? } ?>
+    </ul>
+  </div>
+

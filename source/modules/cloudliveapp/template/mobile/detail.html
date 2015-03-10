@@ -1,0 +1,195 @@
+ <!doctype html>
+<html lang="ch" >
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/> 
+<meta name="sharecontent" data-msg-img="{$_W['attachurl']}{$cloudliveapp['icon']}" data-msg-title="{$cloudliveapp['title']}" data-msg-content="{$cloudliveapp['title']}" data-msg-callBack="{$cloudliveapp['share']}" data-line-img="{$_W['attachurl']}{$cloudliveapp['icon']}" data-line-title="" data-line-callBack=""/><title>{$cloudliveapp['title']}</title>
+<script type="text/javascript">
+document.write('<div id="load-layer"><div id="loading">  <figure><div class="dot white"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></figure></div></div>');
+window.onload=function(){
+	var load = document.getElementById("load-layer");
+	load.parentNode.removeChild(load);
+}
+</script>
+<link rel="stylesheet" type="text/css" href="/source/modules/cloudliveapp/template/mobile/css/swiper.css">
+<link rel="stylesheet" type="text/css" href="/source/modules/cloudliveapp/template/mobile/css/index.css">
+<link type="text/css" rel="stylesheet" href="/source/modules/cloudliveapp/template/mobile/css/manimation.css" />
+<link type="text/css" rel="stylesheet" href="/source/modules/cloudliveapp/template/mobile/js/fancybox/fancybox.css" />
+ <link rel="stylesheet" type="text/css" href="/template/22/assets/styles/reset.css?v=3.6"/>
+<link rel="stylesheet" type="text/css" href="/template/22/assets/styles/app.css?v=3.6"/>
+<link rel="stylesheet" type="text/css" href="/template/22/assets/styles/animation.css?v=3.6"/>
+<link rel="stylesheet" type="text/css" href="/template/22/assets/styles/units.css?v=3.6"/>
+<link rel="stylesheet" type="text/css" href="/template/22/assets/styles/modules.css?v=3.6"/>
+<link rel="stylesheet" type="text/css" href="/template/22/assets/styles/page.css?v=3.6"/>
+<script src=/source/modules/cloudliveapp/template/mobile/js/app/offline.js></script> 
+<script type="text/javascript" src="/template/22/assets/scripts/seajs/sea.js"></script>
+<script type="text/javascript" src="/source/modules/site/template/js/new_wxshare.js"></script>
+
+<script type="text/javascript">
+		var assetsVersion = '3.7';
+		seajs.config({
+			map: [
+				[ /^(.*\.(?:css|js))(.*)$/i, '$1?ver='+ assetsVersion]
+			]
+		});
+		seajs.use('page/main');
+	 </script>
+<script type="text/javascript">
+	if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
+		var version = parseFloat(RegExp.$1);
+		if(version>2.3){
+			var phoneScale = parseInt(window.screen.width)/640;
+			document.write('<meta name="viewport" content="width=640, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
+		}else{
+			document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+		}
+	}else{
+		document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+	}
+	//微信去掉下方刷新栏
+	if(navigator.userAgent.indexOf('MicroMessenger') >= 0){
+		document.addEventListener('WeixinJSBridgeReady', function() {
+			//WeixinJSBridge.call('hideToolbar');
+		});
+	}
+	</script>
+	<style>
+figure { 
+  position: absolute;
+  margin: auto;
+  top: 0; bottom: 0; left: 0; right: 0;
+  width: 6.250em; height: 6.250em;
+  animation: rotate 2.4s linear infinite;
+}
+.white { 
+  top: 0; bottom: 0; left: 0; right: 0; 
+  background: white; 
+  animation: flash 2.4s linear infinite;
+  opacity: 0;
+}
+.dot {
+  position: absolute;
+  margin: auto;
+  width: 2.4em; height: 2.4em;
+  border-radius: 100%;
+  transition: all 1s ease;
+}
+.dot:nth-child(2) { top: 0; bottom: 0; left: 0; background: #FF4444; animation: dotsY 2.4s linear infinite; }
+.dot:nth-child(3) { left: 0; right: 0; top: 0; background: #FFBB33; animation: dotsX 2.4s linear infinite; }
+.dot:nth-child(4) { top: 0; bottom: 0; right: 0; background: #99CC00; animation: dotsY 2.4s linear infinite; }
+.dot:nth-child(5) { left: 0; right: 0; bottom: 0; background: #33B5E5; animation: dotsX 2.4s linear infinite; }
+
+@keyframes rotate {
+  0% { transform: rotate( 0 ); }
+  10% { width: 6.250em; height: 6.250em; }
+  66% { width: 2.4em; height: 2.4em; }
+  100%{ transform: rotate(360deg); width: 6.250em; height: 6.250em; }
+}
+
+@keyframes dotsY {
+  66% { opacity: .1; width: 2.4em; }
+  77%{ opacity: 1; width: 0; }
+}
+@keyframes dotsX {
+  66% { opacity: .1; height: 2.4em;}
+  77%{ opacity: 1; height: 0; }
+}
+
+@keyframes flash {
+  33% { opacity: 0; border-radius: 0%; }
+  55%{ opacity: .6; border-radius: 100%; }
+  66%{ opacity: 0; }
+}
+
+</style>
+
+<script src="/js/prefixfree.min.js"></script>
+</head>
+<body>
+{if (($cloudliveapp['open'])&&($cloudliveapp['ostyle']==1))}
+<div id="mas">
+	<canvas id="cas" ></canvas>
+</div>  
+{/if}
+<div class="swiper-container">
+	<!--音乐控制-->
+ 
+	<!-- 滑动操作指示 -->
+	<div class="start"><strong></strong></div>
+	<!-- 主体 -->
+	<div class="swiper-wrapper">
+		{php $i = 0;}
+		{loop $result['list'] $row}
+		{php $i++}
+		<div class="swiper-slide slide{$i}" style="background: url('{$_W['attachurl']}{$row['attachment']}') no-repeat center center; background-size: 100% 100%;" {if !empty($row['url'])}onclick="javascript:window.location.href='{$row['url']}'"{/if}>
+			{loop $row['items'] $item}
+			{if ($item['type']==0)}
+			{php $size = GetImageSize($_W['attachurl'].$item['item']);}
+			<div class="{$item['animation']}" style="height:{php echo $size[1]/10.08}%;width:{php echo $size[0]/6.4}%;top:{php echo $item['y']/10.08}%;left:{php echo $item['x']/6.40}%;-webkit-animation-delay:{$item['icemiao']}ms;">{if $item['url']}{if ($item['url']=='#share')}<a href="javascript:$('#mcover').show()">{else}<a class="fancy iframe" href="{$item['url']}">{/if}<img src="{$_W['attachurl']}{$item['item']}" style="width:100%;height:100%;"/></a>{else}<img src="{$_W['attachurl']}{$item['item']}" style="width:100%;height:100%;"/>{/if}</div>
+			{/if}
+			{/loop}
+		</div>   
+		{/loop}
+	</div>
+</div>
+{if !empty($cloudliveapp['music'])}
+ 
+ 
+<a href="javascript:void(0);" class="u-globalAudio">
+<i class="icon-music"></i>
+<audio src="{$cloudliveapp['music']}" autoplay="autoplay" loop="loop"></audio>
+</a>
+ 
+
+{/if}
+<script src="/source/modules/cloudliveapp/template/mobile/js/jquery.min.js"></script>
+<script src="/source/modules/cloudliveapp/template/mobile/js/swiper.min.js"></script>
+<script src="/source/modules/cloudliveapp/template/mobile/js/wechat.min.js"></script>
+<script src="/source/modules/cloudliveapp/template/mobile/js/fancybox/fancybox.js"></script>
+{if (($cloudliveapp['open'])&&($cloudliveapp['ostyle']==1))}
+<!-- 手指擦除效果 -->
+<script src="/source/modules/cloudliveapp/template/mobile/js/tapclip.min.js"></script>
+<script type="text/javascript">
+var canvas = document.getElementById("cas"),ctx = canvas.getContext("2d");
+var x1,y1,a=20,timeout,totimes = 100,jiange = 20;
+canvas.width = document.getElementById("mas").clientWidth;
+canvas.height = document.getElementById("mas").clientHeight;
+var img = new Image();
+img.src = "{$_W['attachurl']}{$cloudliveapp['open']}";
+img.onload = function(){
+	ctx.drawImage(img,0,0,canvas.width,canvas.height)
+	tapClip()
+}
+</script>
+{/if}
+<script type="text/javascript">
+<!-- 滑动 -->
+var mySwiper = new Swiper('.swiper-container',{
+	loop:{$cloudliveapp['isloop']},
+	mode:'vertical',
+	tdFlow: {
+		rotate :60,
+		depth: 150,
+	}
+})
+ 
+</script>
+<!-- 弹出层设置 -->
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".fancy").fancybox({
+		'width':'100%',
+		'height'	:'100%',
+		'margin':'0',
+		'padding':'0',
+		'scrolling':'no',
+		'autoScale':'false',
+		'type':'iframe'
+	});
+});
+</script>
+ 
+ 
+<div id="mcover" onclick="$(this).hide()"><img src="/source/modules/site/template/image/guide.png"></div>
+</body>
+</html>

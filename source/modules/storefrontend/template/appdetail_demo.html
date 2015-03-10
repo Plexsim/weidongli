@@ -1,0 +1,10 @@
+<div class="det-intro-container">
+  <div id="more-intro-container">
+        {if empty($item->demo)}
+          这个开发者很懒，什么都没留下。
+        {else}
+          {php echo $item->demo; }
+        {/if}
+  </div>
+</div>
+

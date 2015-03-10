@@ -1,0 +1,72 @@
+{template 'common/header'}
+
+<ul class="nav nav-tabs">
+	<li class="active"><a href="#">帮助</a></li>
+</ul>
+<div class="main">
+	<div style="padding:15px;">
+		<h3 class="title">操作步骤</h3>
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="max-width:10px;">步骤</th>
+					<th style="min-width:200px">说明</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>第一步：增加关键字触发</td>
+					<td>增加"查看积分", "我的排名"两个关键字。回复一栏默认即可。</td>
+				</tr>
+				<tr>
+					<td>第二步：增加文章分类、增加文章</td>
+					<td>与系统自带”微文章(CMS)"操作一致</td>
+				</tr>
+				<tr>
+					<td>第三步：进入“点击分享记录”查看分享记录</td>
+					<td>可以多个维度查看记录</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3 class="title">FAQ</h3>
+		<table class="table table-striped">
+			<tbody>
+				<tr class="success">
+					<td>问：第一步中，我可以增加其它关键字吗？</td>
+				</tr>
+				<tr>
+					<td>答：可以。"查看积分", "我的排名"两个关键字是必须的，但依然可以增加其他关键字。</td>
+				</tr>
+    		<tr class="success">
+					<td>问："积分奖励上限"是指给每个人奖励的上限，还是这篇文章累计可以送出的积分</td>
+				</tr>
+				<tr>
+					<td>答：是后者。总积分量一定，先转先得。</td>
+				</tr>
+      </tbody>
+		</table>
+
+		{if $_W['isfounder']}
+		<h3 class="title">FAQ2 【本部分仅管理员可见，不懂担心客户能看到】</h3>
+		<table class="table table-striped">
+			<tbody>
+				<tr>
+					<td>问：我还有其他问题，怎么办?</td>
+				</tr>
+				<tr>
+					<td>答：问题咨询请<a href="http://bbs.we7.cc/thread-2584-1-1.html" target="_blank">在论坛跟帖提问</a>；模块定制，请使用论坛上公布的QQ联系作者【微动力】</td>
+				</tr>
+				<tr>
+					<td>问：我想换模板，怎么搞？</td>
+				</tr>
+				<tr>
+					<td>答：因为本模块是基于官方的微文章进行的改进，所以官方的模板理论上是可以用在这里的。但为了能够跟踪访问来源，我们对list.html, detail.html, footer.html有一些修改。你可以让我帮你修改模板，收费10块钱一套。【微动力】QQ 547753994</td>
+				</tr>
+
+			</tbody>
+		</table>
+    {/if}
+	</div>
+</div>
+{template 'common/footer'}

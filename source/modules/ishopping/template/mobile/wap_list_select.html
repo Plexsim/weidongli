@@ -1,0 +1,26 @@
+{template wap_header}
+<link href='./source/modules/ishopping/style/css/products.css?v=20140301' rel='stylesheet' type='text/css' />
+<link href='./source/modules/ishopping/style/css/products_media.css?t=20140127' rel='stylesheet' type='text/css' />
+<div id="shop_page_contents">
+	<div id="cover_layer"></div>
+	{template wap_menu}
+	<div id="products">
+		<div class="station">
+			<a href="{php echo $this->createMobileUrl('waplist', array('cateid' => 0));}">产品展示</a> &gt;
+			{if !empty($upcateory)}<a href="{php echo $this->createMobileUrl('waplist', array('cateid' => $upcateory['id']));}">{$upcateory['name']}</a> &gt; {/if}
+			<a href="{php echo $this->createMobileUrl('waplist', array('cateid' => $curcategory['id']));}">{$curcategory['name']}</a>
+		</div>
+			<div class="list-1">
+				{loop $list $row}
+				<div class="item">
+					<ul>
+						<li class="img"><a href="{php echo $this->createMobileUrl('wapdetail', array('goodsid' => $row['id']));}"><img src="{$_W['attachurl']}{$row['thumb']}"></a></li>
+						<li class="name"><a href="{php echo $this->createMobileUrl('wapdetail', array('goodsid' => $row['id']));}">{$row['title']}</a><span>￥{$row['marketprice']}</span></li>
+					</ul>
+				</div>
+				{/loop}
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+{template wap_footer}

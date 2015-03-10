@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<panorama>
+  <view fovmode="0">
+    <start pan="0" tilt="0" fov="70"/>
+    <min pan="0" tilt="-90" fov="5"/>
+    <max pan="360" tilt="90" fov="120"/>
+  </view>
+  <autorotate speed="0.100" delay="3.0" returntohorizon="0.000" startloaded="1"/>
+  <input tilesize="500" tilescale="1.01335" tile0url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/" tile1url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/" tile2url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/" tile3url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/" tile4url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/" tile5url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/"/>
+  <userdata title="" description="" author="" datetime="" copyright="" source="" info="" comment=""/>
+  <control sensitifity="8" simulatemass="1" lockedmouse="0" lockedkeyboard="0" lockedwheel="0" invertwheel="0" speedwheel="1" dblclickfullscreen="0" invertcontrol="1"/>
+  <sounds/>
+</panorama>

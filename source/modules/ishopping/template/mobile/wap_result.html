@@ -1,0 +1,18 @@
+{template wap_header}
+<link href='./source/modules/ishopping/style/css/cart.css' rel='stylesheet' type='text/css' />
+<script language="javascript">$(document).ready(shop_obj.page_init);</script>
+<div id="shop_page_contents">
+    <div id="cover_layer"></div>
+    <div id="cart">
+        <div class="item">
+            <div class="img"><img src="./source/modules/ishopping/style/images/right.gif" /></div>
+            <dl class="info">
+                <span style="color:#f00;font-size: 18px;">支付成功</span>
+                <br><br>
+                您现在可以去:<br>
+                <a href="../../{php echo $this->createMobileUrl('wapmember')}">我的订单 >></a><br>
+                <a href="../../{php echo $this->createMobileUrl('wapindex')}">网站首页 >></a>
+            </dl>
+        </div>
+    </div>
+</div>

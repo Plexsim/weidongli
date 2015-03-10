@@ -1,0 +1,29 @@
+{template 'common/header'}
+<link href="http://qzonestyle.gtimg.cn/open_proj/app_center_v3_nologin.css" rel="stylesheet" media="screen">
+<link href="http://qzonestyle.gtimg.cn/open_proj/app_center_v3_nav.css" rel="stylesheet" media="screen">
+<div class="inner">
+              <div class="title">本周上升最快：</div>
+              <div class="app_list_area">
+                <ul class="app_list" via="appcenter.info.newest">
+{loop $list $item}
+                  <li appid="1101502394">
+                    <div class="img">
+                      <a href="{php echo $this->createWebUrl('AppDetail', array('id'=>$item->id))}" target="_blank">
+                        <img src="{php echo $item->thumb}"><i class="ico ico_bg"></i>
+                      </a>
+                    </div>
+                    <div class="ct">
+                      <a target="_blank" href="{php echo $this->createWebUrl('AppDetail', array('id'=>$item->id))}" title="{php echo $item->title}" class="name textoverflow">{php echo $item->title}</a>
+                      <span class="type">模块</span>
+                      <div class="star c_star_h9">
+                        <span class="c_star_bg " title="8.2分，基于48人的评价"><span class="c_star" style="width:82%;"></span></span>
+                        <span class="c_star_resulte">8.2</span>
+                      </div>
+                    </div>
+                  </li>
+{/loop}
+                </ul>
+              </div>
+            </div>
+</div>
+{template 'common/footer'}

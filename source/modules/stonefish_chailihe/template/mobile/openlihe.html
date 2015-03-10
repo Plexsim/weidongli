@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="./source/modules/stonefish_chailihe/template/images/reset.css?2014-08-28" media="all" />
+<link rel="stylesheet" type="text/css" href="./source/modules/stonefish_chailihe/template/images/prize.css?2014-08-28" media="all" />
+<script type="text/javascript" src="./source/modules/stonefish_chailihe/template/images/common.js?2014-08-28"></script>
+<script type="text/javascript" src="./source/modules/stonefish_chailihe/template/images/prize.js?2014-08-28"></script>
+<script type="text/javascript" src="./source/modules/stonefish_chailihe/template/images/zepto_min.js?2014-08-28"></script>
+<title>{$reply['title']}</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta name="Description" content="{$reply['description']}" />
+<!-- Mobile Devices Support @begin -->
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+<meta content="telephone=no, address=no" name="format-detection">
+<meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<!-- Mobile Devices Support @end -->
+<style>
+    img{max-width:100%!important;}
+</style>
+</head>
+<body onselectstart="return true;" ondragstart="return false;">
+    <div class="shadow-prize"></div>
+    <div data-role="container" class="container">
+        <header data-role="header"><!----></header>
+        <section data-role="body" class="body">
+            
+            <div class="prize-title">{$lihegift['lihetitle']}</div>
+            
+			{if $zhongjiang==0}
+			<div class="shadow-nojiang"><img src="./source/modules/stonefish_chailihe/template/images/nojiang.png" /></div>
+			{else}
+			<img src="{$awardpic}" class="prize-img" />
+            <div class="shadow-cloud"></div>
+            <dl class="prize-ps">
+                <dt>奖品名称：</dt><dd>{$lihegift['title']}</dd>
+				<dt>奖品发放：</dt><dd>{$lihegift['description']}</<dt></dt><dd>{if $zhongjiang==2}{else}{if $zhongjiang==1}{else}{/if}{/if}</dd>奖品将在活动后15个工作日内发放。
+                
+            </dl>
+			{/if}
+            <div class="btn-layout">
+                 {if $zhongjiang==1}<a href="javascript:void(0);" class="btn-exchange" ></a>{else}<a href="{$mylihe}" class="btn-see"></a>{/if}
+                 {if $giftlihe!=0}<a href="{$againreglihe}" class="btn-again2"></a>{/if}
+            </div>
+        </section>
+        <footer data-role="footer">
+            <a href="javascript:;" class="copyright">{if empty($footer_off)}&copy;{if empty($_W['account']['name'])}微擎团队{else}{$_W['account']['name']}{/if}&nbsp;&nbsp;{$_W['setting']['copyright']['statcode']}{/if}</a>
+        </footer>
+    </div>
+    <div class="panel-box">
+        <div class="panel-content">
+            <div class="panel-close"></div>
+            <span class="icon-prize-useless"></span><br/>兑换奖品
+            <hr class="common-hr" />
+            <form action="{$liheduijiang}" method="post">
+                <label for="info-pass">兑换密码</label>
+                <input type="hidden" value="{$uid}" name="info-prize">                
+                <input type="text" name="info-pass" />
+                <div class="btn-layout">
+                    <input type="reset" class="btn-reset" value="取消"/>
+                    <input type="submit" class="btn-confirm" value="确定"/>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	window.shareData = {
+		"imgUrl": "{$picture}",
+		"timeLineLink": "{$shareurl}",
+		"sendFriendLink": "{$shareurl}",
+		"weiboLink": "{$shareurl}",
+		"tTitle": "{$reply['sharetitle']}",
+        "fTitle": "{$reply['sharetitle']}",
+        "tContent": "{$reply['sharecontent']}",
+        "fContent": "{$reply['sharecontent']}",
+        "wContent": "{$reply['sharecontent']}" 
+	};
+
+	// 发送给好友
+	WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+		WeixinJSBridge.invoke('sendAppMessage', {
+			"img_url": window.shareData.imgUrl,
+			"img_width": "640",
+			"img_height": "640",
+			"link": window.shareData.sendFriendLink,
+			"desc": window.shareData.fContent,
+			"title": window.shareData.fTitle
+		}, function (res) {
+			_report('send_msg', res.err_msg);
+		})
+	});
+
+	// 分享到朋友圈
+	WeixinJSBridge.on('menu:share:timeline', function (argv) {
+		WeixinJSBridge.invoke('shareTimeline', {
+			"img_url": window.shareData.imgUrl,
+			"img_width": "640",
+			"img_height": "640",
+			"link": window.shareData.timeLineLink,
+			"desc": window.shareData.tContent,
+			"title": window.shareData.tTitle
+		}, function (res) {
+			_report('timeline', res.err_msg);
+		});
+	});
+
+	// 分享到微博
+	WeixinJSBridge.on('menu:share:weibo', function (argv) {
+		WeixinJSBridge.invoke('shareWeibo', {
+			"content": window.shareData.wContent,
+			"url": window.shareData.weiboLink
+		}, function (res) {
+			_report('weibo', res.err_msg);
+		});
+	});
+}, false);
+</script>
+</html>

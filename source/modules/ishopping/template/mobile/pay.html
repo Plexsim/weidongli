@@ -1,0 +1,37 @@
+{template wap_header}
+<link href='/source/modules/ishopping/style/css/cart.css' rel='stylesheet' type='text/css' />
+<div id="shop_page_contents">
+    <div id="cover_layer"></div>
+    <div id="payment">
+        <div class="i-ture">
+            <h1 class="t">订单支付</h1>
+            <div class="info">
+                订 单 号：{$order['ordersn']}<br />
+                付款方式：{if $order['paytype'] == 1}余额付款{else if $order['paytype'] == 2}在线支付{else if $order['paytype'] == 3}货到付款{/if}<br />
+                付款金额：{php echo sprintf('%.2f', $order['totalprice']);} 元<br />
+                {if $order['paytype'] == 1}
+                {if empty($card)}
+                您还没有领取会员卡!
+                {else}
+                您的卡号：{$card['cardpre']}{$card['cardno']}<br />
+                帐户余额：{php echo sprintf('%.2f', $balance_coin);} 元
+                {/if}
+                {/if}
+            </div>
+        </div>
+        <form action="" method="post" style="overflow:hidden;">
+            <div class="payment">
+                {if $order['paytype'] == 1}
+                <input type="submit" value="立即支付" name="paytype_balance"/>
+                <input type="hidden" name="paytype" value="1" />
+                {else if $order['paytype'] == 2}
+                <input type="submit" value="确认" name="paytype_alipay"/>
+                <input type="hidden" name="paytype" value="2" />
+                {/if}
+                <input type="hidden" name="orderid" value="{$orderid}" />
+                <input type="hidden" name="token" value="{$_W['token']}" />
+            </div>
+        </form>
+    </div>
+</div>
+{template wap_footer}

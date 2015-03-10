@@ -1,0 +1,35 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li {if $operation == 'manage'}class="active"{/if} ><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'manage'));}">管理</a></li>
+    <li {if $operation == 'start_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'start_add'));}">开场静态页</a></li>
+    <li {if $operation == 'audio_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'audio_add'));}">音频添加</a></li>
+    <li {if $operation == 'picture_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'picture_add'));}">图片添加</a></li>
+    <li {if $operation == 'share'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'share'));}">设置分享</a></li>
+    <li {if $operation == 'play_order'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'play_order'));}">播放顺序</a></li>
+    </ul>
+
+<div class="main">
+<form action="" class="form-horizontal form" method="post" enctype="multipart/form-data" >
+    <h4>播放顺序</h4>
+    <table class="tb">
+        <tr>
+            <th><label for="">选择先播放的图片</label></th>
+            <td>
+                <input type="radio" name="play_order" value="1" {if $demo['play_order'] == 1 || empty($demo['play_order'])}checked{/if}> 渐变图&nbsp;&nbsp;
+                <input type="radio" name="play_order" value="2" {if $demo['play_order'] == 2}checked{/if}> 文字图
+                <span class="help-block"></span>
+            </td>
+        </tr>
+
+        <tr>
+            <th></th>
+            <td>
+                <button type="submit" class="btn btn-primary span3" name="submit" value="提交">提交</button>
+                <input type="hidden" name="token" value="{$_W['token']}" />
+            </td>
+        </tr>
+
+    </table>
+</form>
+</div>
+{template 'common/footer'}

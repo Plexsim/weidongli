@@ -1,0 +1,313 @@
+
+<!DOCTYPE html>
+<html>
+<head>微爱云营销平台{else}{$_W['setting']['copyright']['sitename']}{/if}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <link rel="shortcut icon" href="./resource/mstyle/img/favicon.ico?v=2014-05-21" />
+        <link rel="stylesheet" type="text/css" href="./resource/mstyle/css/bootstrap_min.css?v=2014-05-21" media="all" />
+<link rel="stylesheet" type="text/css" href="./resource/mstyle/css/bootstrap_responsive_min.css?v=2014-05-21" media="all" />
+<link rel="stylesheet" type="text/css" href="./resource/mstyle/css/style.css?v=2014-05-21" media="all" />
+<link rel="stylesheet" type="text/css" href="./resource/mstyle/css/todc_bootstrap.css?v=2014-05-21" media="all" />
+<link rel="stylesheet" type="text/css" href="./resource/mstyle/css/themes.css?v=2014-05-21" media="all" />
+<link rel="stylesheet" type="text/css" href="./resource/mstyle/css/inside.css?v=2014-05-21" media="all" />
+<link rel="stylesheet" type="text/css" href="./resource/mstyle/css/page/binding.css?v=2014-05-21" media="all" />
+<script type="text/javascript" src="./resource/mstyle/src/jQuery.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/mstyle/src/bootstrap_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/mstyle/src/plugins/validation/jquery_validate_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/mstyle/src/plugins/validation/jquery_validate_methods.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/mstyle/src/plugins/form/jquery_form_min.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/mstyle/src/plugins/flot/jquery_flot.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/mstyle/src/plugins/flot/jquery_easy_pie_chart.js?v=2014-05-21"></script>
+<script type="text/javascript" src="./resource/mstyle/src/inside.js?v=2014-05-21"></script>
+        <!--[if IE 7]>
+			<link rel="stylesheet" href="./resource/style/font-awesome-ie7.min.css">
+        <![endif]-->
+        <!--[if lte IE 8]>
+            <script src="./resource/mstyle/js/excanvas_min.js?v=2014-05-21"></script>
+        <![endif]-->
+        <!--[if lte IE 9]>
+            <script src="./resource/mstyle/js/watermark.js?v=2014-05-21"></script>
+        <![endif]-->
+    </head>
+	<body>
+    <div id="main">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="box">
+                        <div class="box-title">
+                            <div class="span12">
+                                <h3><i class="icon-cog"></i>公众帐号智能绑定<small>(公众平台安全中心的手机保护需处于未开启状态)</small></h3>
+
+                            </div>
+                        </div>
+                        <div class="box-content">
+                            <div class="bboxl step1">
+                                <div class="pd">
+                                    <div class="f14 mb30">
+                                        请输入微信公众平台帐号信息，非"微盒"帐号。无帐号点击<a href="https://mp.weixin.qq.com" target="_blank">申请</a>
+                                    </div>
+
+                                    <form action="" method="post" class="form-horizontal form-validate2">
+                                        <div class="control-group">
+                                            <label class="control-label" for="wxusername">微信公众平台帐号:</label>
+                                            <div class="controls">
+                                                <input type="text" name="wxusername" id="wxusername" class="input-large" data-rule-required="true" data-rule-maxlength="60" />
+                                                <span for="wxusername" class="help-block error valid"></span>
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="wxpassword">密码:</label>
+                                            <div class="controls">
+                                                <input type="password" name="wxpassword" id="wxpassword" class="input-large" data-rule-required="true" data-rule-maxlength="60" />
+                                                <span for="wxpassword" class="help-block error valid"></span>
+                                            </div>
+                                        </div>
+                                        <div class="control-group hide" id="img_code_group">
+                                            <label class="control-label" for="verifycode">验证码:</label>
+                                            <div class="controls">
+                                                <input type="text" name="verifycode" id="verifycode" class="input-small" />
+                                                <span for="verifycode" class="help-block error valid"></span>
+                                                <img src="" id="img_code" style="width: 80px;" />
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden" id="sig" name="sig" />
+                                        <div class="form-actions">
+											<input type="hidden" name="submit" value="save">
+											<input type="hidden" name="token" value="{$_W['token']}" />
+                                            <button id="bsubmit" type="submit" data-loading-text="绑定中..." class="btn btn-primary">智能绑定</button>
+                                        </div>
+                                    </form>
+                                    <div class="f14 gray">
+                                        帐号及密码仅限智能绑定使用，不保存！不泄漏！不放心？点此 <a href="{php echo create_url('account/post', array('id' => $row['weid']))}">手动绑定</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="bboxl step2 hide">
+                                <div class="carousel">
+                                    <img src="./resource/mstyle/img/binding/b1.jpg" />
+                                </div>
+                            </div>
+                            <div class="bboxl step3 hide">
+                                <div class="pd">
+                                    <div class="end">
+                                        <div class="p1 margin-bm10">智能绑定完成，请验证绑定结果</div>
+                                        <div class="f14 mb30">
+                                           使用个人帐号向您的公众帐号发送一条文本消息“验证”，如收到“绑定成功，小创,小新来了”，表明您已成功完成智能绑定。
+                                        </div>
+                                        <div class="mb30">
+                                            <a class="btn btn-primary btn-large btn-zdy" id="gotomyaccount" href="{php echo create_url('account')}" target="_top">进入“微”世界</a>
+                                        </div>
+                                        <div class="f14 margin-bm10">
+                                            未收到消息，点此<a href="javascript:location.reload()">重新绑定</a>
+                                        </div>
+                                        <div class="f14 gray">
+                                            友情提示：
+                                            <div id = 'suc_tip'>您当前微信公众平台帐号类型为订阅号/认证订阅号/服务号， 会存在因帐号类型权限造成功能无法使用的问题。</div>
+                                        </div>
+                                    </div>
+                                    <div class="mm">
+                                        <img src="./resource/mstyle/img/binding/mm.jpg" />
+                                        <div class="f14 gray">"小景"来了~  </div>
+                                        <div class="f14 gray">关注微场景，惊喜每一天！</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bboxr selid1 ">
+                                <div class="t1">
+							欢迎使用微场景公众帐号智能绑定功能，您只需输入微信公众帐号及密码，将自动完成平台与微信公众平台的数据对接，请耐心等耐。
+                                </div>
+                                <div class="t2">微场景</div>
+                                <div class="t3">
+                                    将带你走进商机无限的“微”世界
+与你共创“微”未来
+                                </div>
+                            </div>
+                            <div class="bboxr selid2 hide">
+                                <div class="t2">微场景</div>
+                                <div class="t3">
+                                    将带你走进商机无限的“微”世界
+与你共创“微”未来
+                                </div>
+                                <div class="t4">
+                                    <div class="inline">
+                                        <div class="title">授权验证</div>
+                                        <div class="easypiechart" data-step="1">
+                                            <span class="h2 step"></span>%
+                                        </div>
+                                    </div>
+                                    <div class="inline">
+                                        <div class="title">平台对接</div>
+                                        <div class="easypiechart" data-step="2">
+                                            <span class="h2 step"></span>%
+
+                                        </div>
+                                    </div>
+                                    <div class="inline">
+                                        <div class="title">数据同步</div>
+                                        <div class="easypiechart" data-step="3">
+                                            <span class="h2 step"></span>%
+                                        </div>
+                                    </div>
+                                    <div class="inline">
+                                        <div class="title">功能开通</div>
+                                        <div class="easypiechart" data-step="-1">
+                                            <span class="h2 step"></span>%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bbbp f14 tile-themed">
+                                我们提供更便捷、更贴心、更高效的微信公众智能服务。
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+
+
+        var $from = $("form.form-validate2"),
+			$step1 = $("div.step1"),
+			  $step2 = $("div.step2"),
+				$step3 = $("div.step3"),
+				  $selid1 = $("div.selid1"),
+					$selid2 = $("div.selid2"),
+					  $ep1 = $('.easypiechart:eq(0)');
+        var ischrome = window.navigator.userAgent.indexOf("Chrome") !== -1;
+            $from.validate({
+                errorElement: "span",
+                errorClass: "help-block error",
+                errorPlacement: function (e, t) {
+                    var p = t.parents(".controls");
+                    if (p.length > 0) {
+                        p.append(e);
+                    }
+                    else {
+                        t.addClass("error")
+                    }
+                },
+                highlight: function (e) {
+                    $(e).closest(".control-group").removeClass("error success").addClass("error")
+                },
+                success: function (e) {
+                    e.addClass("valid").closest(".control-group").removeClass("error success");
+                },
+
+                submitHandler: function (form) {
+                    var btn = $("button[type='submit']", form);
+                    btn.button('loading')
+                    $(form).ajaxSubmit({
+                        dataType: 'json',
+                        success: function (d) {
+                            btn.button('reset');
+                            if (d.errno == 0) {
+								// 修改跳转链接
+								var url = "{php echo create_url('account/switch')}&id="+ d.weid;
+								$('#gotomyaccount').attr('href', url);
+
+								$('#suc_tip').html(d.error);
+                                $step1.animate({ opacity: 0 }, 1000, function () {
+									$.get("{php echo create_url('account/autobind',array('step'=>2))}&weid="+d.weid);								
+                                    $(this).addClass("hide");
+                                });
+                                $selid1.animate({ opacity: 0 }, 1000, function () {
+                                    $(this).addClass("hide");
+                                    $step2.fadeIn('slow');
+                                    $selid2.fadeIn('slow', function () {
+										$.get("{php echo create_url('account/autobind',array('step'=>3))}&weid="+d.weid);						
+                                        $ep1.data('easyPieChart').update(100);
+                                    });
+                                });
+                            } else {
+                                if (d.errno == -21) {
+                                    alert('帐号不存在');
+                                } else if (d.errno == -23) {
+                                    alert('帐号密码不正确');
+                                } else if (d.errno == -8) {
+                                    $('#img_code_group').show();
+                                    $('#img_code').attr('src', 'data:image/jpeg;base64,'+d.img_code);
+                                    $('#sig').val(d.sig);
+                                    alert('请输入验证码');
+                                } else if (d.errno == -27) {
+                                    $('#img_code_group').show();
+                                    $('#img_code').attr('src', 'data:image/jpeg;base64,'+d.img_code);
+                                    $('#sig').val(d.sig);
+                                    alert('验证码不正确');
+                                } else {
+                                    alert(d.error);
+                                }
+                            }
+
+                        },
+                        error: function (d) {
+                            btn.button('reset');
+                            G.ui.tips.info(d.responseText);
+                        }
+                    });
+                }
+            });
+
+            var $op = {
+                barColor: "#afcf6f",
+                animate: 5000,
+                lineCap: "butt",
+                lineWidth: 10,
+                scaleColor: "#fff",
+                size: 88,
+                trackColor: "#eee"
+            }
+            $('.easypiechart').each(function () {
+                var $this = $(this),
+                    $data = $this.data(),
+                    $step = $this.find('.step'),
+                    $value = 0;
+                $op.onStep = function (value) {
+                    $value = value;
+                    $step.text(parseInt(value));
+                    $op.target && $($op.target).text(parseInt(value) + $target_value);
+                }
+                $op.onStop = function (v) {
+                    var $$this = (this),
+                        $el = $($$this.el),
+                        $step = $el.data("step")
+                    if ($step > 0 && v > 0) {
+                        $('.easypiechart:eq(' + $step + ')').data('easyPieChart').update(100);
+                        $(".carousel img").fadeOut('fast', function () {
+                            $(".carousel img").attr("src", ("./resource/mstyle/img/binding/b{0}.jpg".format($step + 1)));
+                        });
+                        $(".carousel img").fadeIn('slow');
+                    }
+                    if ($step == "-1" && v > 0) {
+                        $step2.animate({ opacity: 0 }, 300, function () {
+                            $(this).hide().addClass("hide");
+                        });
+                        $step3.fadeIn('slow');
+                    }
+
+                }
+                $(this).easyPieChart($op);
+
+            });
+
+        })
+    </script>	<div style="width:100%;text-align:center;font-size:14px;color:#ff0000;display:none;"></div>
+	</body>
+	<script>
+		window.document.onkeydown = function(e) {
+			if ('BODY' == event.target.tagName.toUpperCase()) {
+				var e=e || event;
+　 				var currKey=e.keyCode || e.which || e.charCode;
+				if (8 == currKey) {
+					return false;
+				}
+			}
+		};
+	</script> 
+</html>

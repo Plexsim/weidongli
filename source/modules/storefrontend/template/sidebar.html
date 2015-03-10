@@ -1,0 +1,32 @@
+<div class="nav-menu" style="position: relative; top: 0px;">
+  <ul class="menu">
+    <li>
+    <a href="javascript:void(0)" hidefocus="true"><i class="menu-icon-app"></i>模块分类</a>
+
+    <ul class="menu-junior" data-modname="cates" data-count="22">
+      {php $counter = 1; $offset_id = 1;}
+      <li><a href="{php echo $this->createWebUrl('App')}">最新上传</a></li>
+      {loop $category $c}
+      {php $counter++; }
+      {if $c->id == $active_category}
+        {php $offset_id = $counter; }
+      {/if}
+      <li id="cate-{php echo $c->id}"><a href="{php echo $this->createWebUrl('App', array('id'=>$c->id))}">{php echo $c->name}</a></li>
+      {/loop}
+      {if $my_update_count > 0}
+      <li><a href="{php echo $this->createWebUrl('MyApp')}">更新<div style="float:none;margin-left:6px;" class="badge">{$my_update_count}</div></a></li>
+      {else}
+      <li><a href="{php echo $this->createWebUrl('MyApp')}">更新<div style="float:none;margin-left:6px;background:#777" class="badge">暂无</div></a></li>
+      {/if}
+       <li class="fix-margin"></li>
+    </ul>
+    </li>
+    <li><a href="javascript:void();" onclick="alert('请联系晓楚,QQ:1242740937,加Q注明:开发者入驻');"><i class="menu-icon-collection"></i>开发者加盟</a></li>
+    <li><a href="{php echo $this->createWebUrl('StoreAdvice');}"><i class="menu-icon-rank"></i>问题建议</a></li>
+    <li></li>
+  </ul>
+  <div></div>
+  <div id="J_NavLabel" style="top:{php echo $offset_id * 40 + 4; }px" data="-1" class="nav-label">
+    <span></span>
+  </div>
+</div>

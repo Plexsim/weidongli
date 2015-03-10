@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<link rel="stylesheet" type="text/css" href="./source/modules/stonefish_chailihe/template/images/reset.css?2014-08-28" media="all" />
+<link rel="stylesheet" type="text/css" href="./source/modules/stonefish_chailihe/template/images/openPrize.css?2014-08-28" media="all" />
+<script type="text/javascript" src="./source/modules/stonefish_chailihe/template/images/common.js?2014-08-28"></script>
+<script type="text/javascript" src="./source/modules/stonefish_chailihe/template/images/openPrize.js?2014-08-28"></script>
+<script type="text/javascript" src="./source/modules/stonefish_chailihe/template/images/zepto_min.js?2014-08-28"></script>
+<title>{$reply['title']}</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport">
+<meta name="Description" content="{$reply['description']}" />
+<!-- Mobile Devices Support @begin -->
+<meta content="application/xhtml+xml;charset=UTF-8" http-equiv="Content-Type">
+<meta content="no-cache,must-revalidate" http-equiv="Cache-Control">
+<meta content="no-cache" http-equiv="pragma">
+<meta content="0" http-equiv="expires">
+<meta content="telephone=no, address=no" name="format-detection">
+<meta name="apple-mobile-web-app-capable" content="yes" /> <!-- apple devices fullscreen -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<!-- Mobile Devices Support @end -->
+<style>
+    img{max-width:100%!important;}
+	.container{background-image: url({$picbg02});}
+</style>
+</head>
+<body onselectstart="return true;" ondragstart="return false;">
+    <div data-role="container" class="container">
+        <header data-role="header"><!----></header>
+        <section data-role="body" class="body">
+            <div class="text-num {$openedstyle}"> <!--first第一个/last最后一个/done成功拆开/opened拆开中-->
+                <span class="have">{$chainum}</span>
+                <span class="rest">{$rest}</span>
+            </div>
+            <div class="choose-content-bg"></div>
+            <div class="choose-content {$openedstyle}">
+                <ul>
+                    <li class="prize{$listgift['gift']}" data-id="{$listgift['id']}"><img src="./resource/attachment/headimg_{$weid}.jpg" /></li>
+                </ul>
+            </div>
+            <div class="btn-layout">
+                                {if $reply['opentype']==1 and $opentype!=1}
+								    {if $rest!=0 and $openlihe_is==0}
+								        <a href="{$openlihe}" class="btn-open-other" ></a>
+								    {else}
+                                        <a href="javascript:void(0);" class="btn-alert-other" ></a>
+								    {/if}
+								{else}
+								    {if $rest!=0}
+								        <a href="javascript:void(0);" class="btn-help-other" ></a>
+								    {else}
+                                        <a href="javascript:void(0);" class="btn-alert-other" ></a>
+								    {/if}
+								{/if}
+                                <a href="{$reglihe}" class="btn-get-too"></a>								
+                                <!--<a href="" class="btn-get-too big"></a> 只有一个按钮的时候可增加一个big -->
+                             
+            </div>
+        </section>
+        <footer data-role="footer">
+            <a href="javascript:;" class="copyright">{if empty($footer_off)}&copy;{if empty($_W['account']['name'])}微擎团队{else}{$_W['account']['name']}{/if}&nbsp;&nbsp;{$_W['setting']['copyright']['statcode']}{/if}</a>
+        </footer>
+    </div>
+    <div class="share-layer"></div>
+</body>
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	window.shareData = {
+		"imgUrl": "{$picture}",
+		"timeLineLink": "{$shareurl}",
+		"sendFriendLink": "{$shareurl}",
+		"weiboLink": "{$shareurl}",
+		"tTitle": "{$reply['sharetitle']}",
+        "fTitle": "{$reply['sharetitle']}",
+        "tContent": "{$reply['sharecontent']}",
+        "fContent": "{$reply['sharecontent']}",
+        "wContent": "{$reply['sharecontent']}" 
+	};
+
+	// 发送给好友
+	WeixinJSBridge.on('menu:share:appmessage', function (argv) {
+		WeixinJSBridge.invoke('sendAppMessage', {
+			"img_url": window.shareData.imgUrl,
+			"img_width": "640",
+			"img_height": "640",
+			"link": window.shareData.sendFriendLink,
+			"desc": window.shareData.fContent,
+			"title": window.shareData.fTitle
+		}, function (res) {
+			_report('send_msg', res.err_msg);
+		})
+	});
+
+	// 分享到朋友圈
+	WeixinJSBridge.on('menu:share:timeline', function (argv) {
+		WeixinJSBridge.invoke('shareTimeline', {
+			"img_url": window.shareData.imgUrl,
+			"img_width": "640",
+			"img_height": "640",
+			"link": window.shareData.timeLineLink,
+			"desc": window.shareData.tContent,
+			"title": window.shareData.tTitle
+		}, function (res) {
+			_report('timeline', res.err_msg);
+		});
+	});
+
+	// 分享到微博
+	WeixinJSBridge.on('menu:share:weibo', function (argv) {
+		WeixinJSBridge.invoke('shareWeibo', {
+			"content": window.shareData.wContent,
+			"url": window.shareData.weiboLink
+		}, function (res) {
+			_report('weibo', res.err_msg);
+		});
+	});
+}, false);
+</script>
+</html>

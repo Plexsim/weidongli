@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.51">
+	<application setting="false">
+		<name><![CDATA[摇一摇现场版]]></name>
+		<identifie><![CDATA[yyy]]></identifie>
+		<version><![CDATA[2.0]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[现场大屏互动类活动]]></ability>
+		<description><![CDATA[摇一摇，让你在现场迅速引爆人气。]]></description>
+		<author><![CDATA[Carloss Wei]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+		<rule>
+			<entry title="中奖名单" do="awardlist" state="" />
+			<entry title="大屏幕" do="Bigscreen" state="" />
+		</rule>
+		
+	</bindings>
+	<install><![CDATA[
+CREATE TABLE `ims_yyy_winner` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL COMMENT '规则ID',
+  `from_user` varchar(50) NOT NULL COMMENT '用户唯一身份ID',
+  `count` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '摇的次数',
+  `createtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '第一次摇时间',
+  `endtime` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '摇到100时的时间',
+  `status` smallint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+CREATE TABLE `ims_yyy_reply` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rid` int(10) unsigned NOT NULL COMMENT '规则ID',
+  `picture` varchar(100) NOT NULL COMMENT '活动图片',
+  `screenpic` varchar(100) NOT NULL COMMENT '大屏图像',
+  `qrcode` varchar(100) NOT NULL DEFAULT '',
+  `description` varchar(100) NOT NULL COMMENT '活动描述',
+  `rule` varchar(1000) NOT NULL COMMENT '规则描述',
+  `ruletype` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `shaketimes` int(10) unsigned NOT NULL DEFAULT '60',
+  `endtime` int(10) NOT NULL DEFAULT '0',
+  `starttime` int(10) unsigned NOT NULL COMMENT '活动开始时间',
+  `shakespace` int(10) NOT NULL DEFAULT '100',
+  `shakestrong` int(10) NOT NULL DEFAULT '3000',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+	]]></install>
+	<uninstall><![CDATA[
+	DROP TABLE IF EXISTS `ims_yyy_winner`;
+	DROP TABLE IF EXISTS `ims_yyy_reply`;
+	]]></uninstall>
+	<upgrade><![CDATA[
+	ALTER TABLE  `ims_yyy_reply` ADD  `shaketimes` int(10) unsigned NOT NULL DEFAULT '60' ;
+	ALTER TABLE  `ims_yyy_reply` ADD  `endtime` int(10) unsigned NOT NULL DEFAULT '0' ;
+	ALTER TABLE  `ims_yyy_reply` ADD  `shakespace` int(10) unsigned NOT NULL DEFAULT '100' ;
+	ALTER TABLE  `ims_yyy_reply` ADD  `shakestrong` int(10) unsigned NOT NULL DEFAULT '3000' ;
+	ALTER TABLE  `ims_yyy_winner` ADD  `status` tinyint(1) unsigned NOT NULL DEFAULT '0' ;
+	ALTER TABLE  `ims_yyy_reply` MODIFY  `ruletype` tinyint(1) unsigned NOT NULL DEFAULT '0' ;
+	UPDATE `ims_yyy_reply` SET ruletype=0 ;
+	]]></upgrade>
+</manifest>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.52">
+	<application setting="false">
+		<name><![CDATA[微文章营销版]]></name>
+		<identifie><![CDATA[quickshare3]]></identifie>
+		<version><![CDATA[2.1]]></version>
+		<type><![CDATA[business]]></type>
+		<ability><![CDATA[展示一个手机网页来介绍你的公众号，基于微动力官方微文章扩展。提供访问跟踪功能。分享转向。]]></ability>
+		<description><![CDATA[]]></description>
+		<author><![CDATA[微动力]]></author>
+		<url><![CDATA[bbs.b2ctui.com]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+		<menu>
+			<entry title="文章管理" do="article" />
+			<entry title="文章分类" do="category" />
+			<entry title="分享点击记录" do="sharetrack" />
+			<entry title="帮助" do="help" />
+		</menu>
+		<home call="getCategoryTiles"></home>
+    </bindings>
+	<install><![CDATA[
+
+
+CREATE TABLE IF NOT EXISTS `ims_quickshare3_article` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL,
+  `iscommend` tinyint(1) NOT NULL DEFAULT '0',
+  `ishot` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `pcate` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '一级分类',
+  `ccate` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '二级分类',
+  `template` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '内容模板',
+  `title` varchar(100) NOT NULL DEFAULT '',
+  `description` varchar(100) NOT NULL DEFAULT '',
+  `content` text NOT NULL,
+  `thumb` varchar(100) NOT NULL DEFAULT '' COMMENT '缩略图',
+  `source` varchar(50) NOT NULL DEFAULT '' COMMENT '来源',
+  `author` varchar(50) NOT NULL COMMENT '作者',
+  `displayorder` int(10) unsigned NOT NULL DEFAULT '0',
+  `linkurl` varchar(500) NOT NULL DEFAULT '',
+  `redirect_url` varchar(500) NOT NULL DEFAULT '',
+  `share_credit` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '分享积分奖励',
+  `click_credit` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '点击积分奖励',
+  `max_credit` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '积分奖励上限',
+  `createtime` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `idx_iscommend` (`iscommend`),
+  KEY `idx_ishot` (`ishot`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_quickshare3_article_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属帐号',
+  `nid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '关联导航id',
+  `name` varchar(50) NOT NULL COMMENT '分类名称',
+  `parentid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上级分类ID,0为第一级',
+  `displayorder` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `enabled` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否开启',
+  `icon` varchar(100) NOT NULL DEFAULT '' COMMENT '分类图标',
+  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '分类描述',
+  `template` VARCHAR(300) NOT NULL DEFAULT '' COMMENT '分类模板',
+  `templatefile` VARCHAR( 100 ) NOT NULL DEFAULT '',
+  `linkurl` varchar(500) NOT NULL DEFAULT '',
+  `ishomepage` TINYINT( 1 ) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_quickshare3_article_reply` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `rid` int(11) NOT NULL,
+  `articleid` int(11) NOT NULL,
+  `isfill` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `ims_quickshare3_share_track` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL,
+  `credit` int(10) unsigned NOT NULL,
+  `track_id` varchar(100) NOT NULL DEFAULT '',
+  `track_type` varchar(100) NOT NULL DEFAULT '',
+  `track_sub_type` varchar(100) NOT NULL DEFAULT '',
+  `track_msg` varchar(100) NOT NULL DEFAULT '',
+  `detail_id` varchar(50) NOT NULL DEFAULT '' COMMENT '具体来源',
+  `title` varchar(50) NOT NULL DEFAULT '' COMMENT '文章标题',
+  `extra` varchar(50) NOT NULL COMMENT '附加信息',
+  `access_time` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+
+]]></install>
+	<uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[upgrade.php]]></upgrade>
+</manifest>

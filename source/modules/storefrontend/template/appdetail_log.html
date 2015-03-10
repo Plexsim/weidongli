@@ -1,0 +1,30 @@
+<style>
+  .log-unit {
+    padding: 20px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 100;
+    line-height: 30px;
+    color: inherit;
+    background-color: #eeeeee;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+  }
+</style>
+<div class="det-intro-container">
+  <div id="more-intro-container">
+    {if empty($logs)}
+      新上架应用，暂无更新
+    {/if}
+    {loop $logs $log_info}
+    <div class='log-unit'>
+      <div>{php echo date('Y-m-d H:i', $log_info->createtime)}<span style="padding-left:20px">{php echo '(' . intval((TIMESTAMP - $log_info->createtime)/(60*60*24)) . '天'. intval((TIMESTAMP - $log_info->createtime)%(60*60*24)/(60*60)) . '小时前)'}</span></div>
+      <div>
+        {php echo htmlspecialchars_decode($log_info->log); }
+      </div>
+    </div>
+    {/loop}
+  </div>
+</div>
+

@@ -1,0 +1,122 @@
+{template 'common/header'}
+{template 'common'}
+<div class="main">
+	<ul class="nav nav-tabs">
+		<li{if $_GPC['do'] == 'manage'} class="active"{/if}><a href="{php echo $this->createWebUrl('manage');}">活动管理</a></li>
+		<li{if $_GPC['do'] == 'post'} class="active"{/if}><a href="{php echo create_url('rule/post',array('module'=>'ewei_comeon'));}">添加活动规则</a></li>
+		<li{if $_GPC['do'] == 'awardlist'} class="active"{/if}><a href="{php echo $this->createWebUrl('awardlist',array('name'=>'ewei_comeon', 'rid' => $rid));}">中奖名单</a></li>
+	</ul>
+		<div class="search">
+		<form action="site.php" method="get">
+		<input type="hidden" name="act" value="module" />
+		<input type="hidden" name="name" value="ewei_comeon" />
+		<input type="hidden" name="do" value="awardlist" />
+		<input type="hidden" name="rid" value="{$_GPC['rid']}" />
+		<table class="table table-bordered tb">
+			<tbody>
+				<tr>
+					<th>关键字</th>
+					<td>
+						<input class="span6" name="keywords" id="" type="text" value="{$_GPC['keywords']}">
+						 可查询手机号
+					</td>
+				</tr>	<tr>
+					<th>状态</th>
+					<td>
+						<select name="status" class="input-small" style="float:left">
+                                        <option value="">全部</option>
+                                        <option value="1">未中奖</option>
+                                        <option value="2">已中奖</option>
+                                        <option value="3">已领奖</option>
+                                    </select>
+                                    <button class="btn btn-primary pull-left span2" style='margin-left:95px;'><i class="icon-search icon-large"></i> 搜索</button>
+					</td>
+				</tr>
+			 
+			</tbody>
+		</table>
+		</form>
+	</div>
+		<div style="padding: 0 15px 0  15px;">
+		  <div class="row-fluid">
+                                <div class="span8 control-group">
+                                    <a class="btn" href="{php echo create_url('site/module', array('do' => 'download', 'name' => 'ewei_comeon','rid'=>$rid))}"><i class="icon-download-alt"></i>导出SN码和兑奖信息</a>
+                                    <a class="btn" href="{php echo create_url('site/module', array('do' => 'awardlist', 'name' => 'ewei_comeon','rid'=>$rid))}">全部</a>
+                                    <a class="btn" href="{php echo create_url('site/module', array('do' => 'awardlist', 'name' => 'ewei_comeon','rid'=>$rid,'status'=>0))}">未中奖</a>
+                                    <a class="btn" href="{php echo create_url('site/module', array('do' => 'awardlist', 'name' => 'ewei_comeon','rid'=>$rid,'status'=>1))}">已中奖</a>
+                                    <a class="btn" href="{php echo create_url('site/module', array('do' => 'awardlist', 'name' => 'ewei_comeon','rid'=>$rid,'status'=>2))}">已领奖</a>
+                                </div>
+                            </div>
+ 
+		</div>
+	<div style="padding: 0 15px 0  15px;" style="position:relative">
+		<table class="table table-hover" style="position:relative">
+			<thead class="navbar-inner">
+				<tr><th>序号</th>
+				<th>微信码</th>
+                                                <th>手机号</th>
+                                                <th>点数</th>
+                                                <th>助力数</th>
+                                                <th>被助力数</th>
+                                              
+                                                
+                                                <th>中奖时间</th>
+                                                <th>使用时间</th>
+                                                <th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $row}
+				<tr>
+				<td>{$row['id']}</td>
+				 <td>{$row['from_user']}</td>
+				<td><span class="label label-teal phone" data-fans="{$row['from_user']}"}>显示手机号</span></td>
+                                                <td>{$row['points']}</td>
+                                                <td>{$row['help']}</td>
+                                                <td>{$row['help1']}</td>
+                                                <td>{if $row['status']==0}<span class="label">未领取</span>{elseif $row['status']==1}<span class="label label-green">已中奖</span>{else}<span class="label label-red">已兑奖</span>{/if}</td>
+                                                
+                                               
+                                                <td>{php echo date('Y/m/d H:i',$row['createtime']);}</td>
+                                                <td>{if $row['consumetime'] == 0}未使用{else}{php echo date('Y/m/d H:i',$row['consumetime']);}{/if}</td>
+                                                <td>
+                                                   
+                                                                <a class="btn" href="#" onclick="drop_confirm('确认设置为未发放?','{php echo create_url('site/module', array('do' => 'setstatus', 'name' => 'ewei_comeon','status'=>0,'id'=>$row['id'],'rid'=>$row['rid']))}');"><i class="icon-ban-circle"></i> 未发放</a>
+                                                           
+                                                                <a class="btn" href="#" onclick="drop_confirm('确认设置为已抽中?','{php echo create_url('site/module', array('do' => 'setstatus', 'name' => 'ewei_comeon','status'=>1,'id'=>$row['id'],'rid'=>$row['rid']))}');"><i class="icon-remove-circle"></i> 已抽中</a>
+                                                           
+                                                                <a class="btn" href="#" onclick="drop_confirm('确认设置为已兑奖?','{php echo create_url('site/module', array('do' => 'setstatus', 'name' => 'ewei_comeon','status'=>2,'id'=>$row['id'],'rid'=>$row['rid']))}');"><i class="icon-ok-circle"></i> 已兑奖</a>
+                                                            
+                                                        </ul>
+                                                    </div>
+                                                </td>
+				</tr>
+				{/loop}
+				
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+	
+</div>
+<script>
+$(".phone").click(function() {
+	$(".phone").addClass('label-teal');
+	$(".phone").text('显示手机号');
+	obj=$(this);
+	obj.text('加载中...');
+	fans=obj.attr('data-fans');
+	$.post("{php echo create_url('site/module', array('do' => 'getphone','name' => 'ewei_comeon','rid'=>$rid))}", { fans: fans},
+	function(data){
+		obj.removeClass('label-teal');
+		obj.text(data);
+	});
+
+});
+	function drop_confirm(msg, url){
+    if(confirm(msg)){
+        window.location = url;
+    }
+}
+</script>
+{template 'common/footer'}

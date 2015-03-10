@@ -1,0 +1,312 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+	<li {if $op == 'display'}class="active"{/if}><a href="{php echo $this->createWebUrl('sharetrack', array('op' => 'display'));}">详细点击记录</a></li>
+	<li {if $op == 'display_article_summary'}class="active"{/if}><a href="{php echo $this->createWebUrl('sharetrack', array('op' => 'display_article_summary'));}">按文章统计</a></li>
+	<li {if $op == 'display_user_summary'}class="active"{/if}><a href="{php echo $this->createWebUrl('sharetrack', array('op' => 'display_user_summary'));}">按用户统计</a></li>
+	<li {if $op == 'display_article_user_summary'}class="active"{/if}><a href="{php echo $this->createWebUrl('sharetrack', array('op' => 'display_article_user_summary'));}">按文章不同用户转发统计</a></li>
+</ul>
+<style>
+.table td span{display:inline-block;margin-top:4px;}
+.table td input{margin-bottom:0;}
+.article_title {
+	max-width:400px;
+}
+.eclipse { 
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	overflow: hidden;
+	width:80px;
+}
+</style>
+{if $op == 'display'}
+<div class="main">
+	<div class="search">
+		<form action="site.php" method="get">
+		<input type="hidden" name="act" value="module" />
+		<input type="hidden" name="do" value="sharetrack" />
+		<input type="hidden" name="name" value="site" />
+		<table class="table table-bordered tb">
+			<tbody>
+				<tr>
+					<th>文章关键字</th>
+					<td>
+						<input class="span6" name="keyword" id="" type="text" value="{$_GPC['keyword']}">
+					</td>
+				</tr>
+				<tr>
+				 <tr class="search-submit">
+					<td colspan="2"><button class="btn pull-right span2"><i class="icon-search icon-large"></i> 搜索</button></td>
+				 </tr>
+			</tbody>
+		</table>
+		</form>
+	</div>
+	<div style="padding:15px;">
+		<table class="table table-hover table-striped">
+			<thead class="navbar-inner">
+				<tr>
+					<th class="article_title">标题</th>
+					<th style="">姓名</th>
+					<th style="">昵称</th>
+					<th style="">手机</th>
+					<th style="">用户ID</th>
+					<th style="">日期</th>
+					<th style="">动作</th>
+					<th style="">点击次数</th>
+					<th style="">奖励积分</th>
+					<th style="width:85px; text-align:right;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $item}
+				<tr>
+					<td>
+						<a href="{php echo $this->createWebUrl('article', array('foo' => 'post', 'id' => $item['detail_id']))}" style="color:#333;">{$item['title']}</a>
+					</td>
+					<td>
+						<span>{$fans[$item['track_id']]['realname']}</span>
+					</td>
+					<td>
+						<span>{$fans[$item['track_id']]['nickname']}</span>
+					</td>
+					<td>
+						<span>{$fans[$item['track_id']]['mobile']}</span>
+					</td>
+					<td>
+						<span class='eclipse' title="{$item['track_id']}">{$item['track_id']}</span>
+					</td>
+					<td>
+						<span>{php echo date("Y-m-d H:m:s", $item['access_time'])}</span>
+					</td>
+					<td>
+						<span>{$item['track_type']}</span>
+					</td>
+					<td>
+						<span>1</span>
+					</td>
+					<td>
+						<span>{$item['credit']}</span>
+					</td>
+					<td style="text-align:right;">
+						<a onclick="return confirm('此操作不可恢复，确认吗？'); return false;" href="{php echo $this->createWebUrl('sharetrack', array('do' => 'delete', 'id' => $item['id'], 'op' => 'delete'))}" title="删除" class="btn btn-mini"><i class="icon-remove"></i></a>
+					</td>
+				</tr>
+				{/loop}
+			</tbody>
+			<!--tr>
+				<td></td>
+				<td colspan="3">
+					<input name="token" type="hidden" value="{$_W['token']}" />
+					<input type="submit" class="btn btn-primary" name="submit" value="提交" />
+				</td>
+			</tr-->
+		</table>
+		{$pager}
+	</div>
+</div>
+{/if}
+
+{if $op == 'display_article_summary'}
+<div class="main">
+	<div class="search">
+		<form action="site.php" method="get">
+		<input type="hidden" name="act" value="module" />
+		<input type="hidden" name="do" value="sharetrack" />
+		<input type="hidden" name="name" value="site" />
+		<input type="hidden" name="op" value="display_article_summary" />
+		<table class="table table-bordered tb">
+			<tbody>
+				<tr>
+					<th>文章关键字</th>
+					<td>
+						<input class="span6" name="keyword" id="" type="text" value="{$_GPC['keyword']}">
+					</td>
+				</tr>
+				<tr>
+				 <tr class="search-submit">
+					<td colspan="2"><button class="btn pull-right span2"><i class="icon-search icon-large"></i> 搜索</button></td>
+				 </tr>
+			</tbody>
+		</table>
+		</form>
+	</div>
+	<div style="padding:15px;">
+		<table class="table table-hover table-striped">
+			<thead class="navbar-inner">
+				<tr>
+					<th class="article_title">标题</th>
+					<th style="">点击次数</th>
+					<th style="">累计奖励积分</th>
+					<th style="width:85px; text-align:right;">展开</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $item}
+				<tr>
+					<td>
+						<a href="{php echo $this->createWebUrl('article', array('foo' => 'post', 'id' => $item['detail_id']))}" style="color:#333;">{$item['title']}</a>
+					</td>
+					<td>
+						<span>{$item['total_click']}</span>
+					</td>
+					<td>
+						<span>{$item['total_credit']}</span>
+					</td>
+					<td style="text-align:right;">
+						<a href="{php echo $this->createWebUrl('sharetrack', array('do' => 'sharetrack', 'keyword' => $item['title'], 'op' => 'display'))}" title="展开当前标题的所有记录" class="btn btn-mini"><i class="icon-list"></i></a>
+					</td>
+				</tr>
+				{/loop}
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+</div>
+{/if}
+{if $op == 'display_article_user_summary'}
+<div class="main">
+	<div class="search">
+		<form action="site.php" method="get">
+		<input type="hidden" name="act" value="module" />
+		<input type="hidden" name="do" value="sharetrack" />
+		<input type="hidden" name="name" value="site" />
+		<input type="hidden" name="op" value="display_article_user_summary" />
+		<table class="table table-bordered tb">
+			<tbody>
+				<tr>
+					<th>文章关键字</th>
+					<td>
+						<input class="span6" name="keyword" id="" type="text" value="{$_GPC['keyword']}">
+					</td>
+				</tr>
+				<tr>
+				 <tr class="search-submit">
+					<td colspan="2"><button class="btn pull-right span2"><i class="icon-search icon-large"></i> 搜索</button></td>
+				 </tr>
+			</tbody>
+		</table>
+		</form>
+	</div>
+	<div style="padding:15px;">
+		<table class="table table-hover table-striped">
+			<thead class="navbar-inner">
+				<tr>
+					<th class="article_title">标题</th>
+					<th style="">姓名</th>
+					<th style="">昵称</th>
+					<th style="">手机</th>
+					<th style="">用户ID</th>
+					<th style="">点击次数</th>
+					<th style="">累计奖励积分</th>
+					<th style="width:85px; text-align:right;">展开</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $item}
+				<tr>
+					<td>
+						<a href="{php echo $this->createWebUrl('article', array('foo' => 'post', 'id' => $item['detail_id']))}" style="color:#333;">{$item['title']}</a>
+					</td>
+					<td>
+						<span>{$fans[$item['track_id']]['realname']}</span>
+					</td>
+					<td>
+						<span>{$fans[$item['track_id']]['nickname']}</span>
+					</td>
+					<td>
+						<span>{$fans[$item['track_id']]['mobile']}</span>
+					</td>
+					<td>
+						<span class='eclipse' title="{$item['track_id']}">{$item['track_id']}</span>
+					</td>
+					<td>
+						<span>{$item['total_click']}</span>
+					</td>
+					<td>
+						<span>{$item['total_credit']}</span>
+					</td>
+					<td style="text-align:right;">
+						<a href="{php echo $this->createWebUrl('sharetrack', array('do' => 'sharetrack', 'keyword' => $item['title'], 'op' => 'display'))}" title="展开当前标题的所有记录" class="btn btn-mini"><i class="icon-list"></i></a>
+					</td>
+				</tr>
+				{/loop}
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+</div>
+{/if}
+{if $op == 'display_user_summary'}
+<div class="main">
+	<div class="search">
+		<form action="site.php" method="get">
+		<input type="hidden" name="act" value="module" />
+		<input type="hidden" name="do" value="sharetrack" />
+		<input type="hidden" name="name" value="site" />
+		<input type="hidden" name="op" value="display_user_summary" />
+		<table class="table table-bordered tb">
+			<tbody>
+				<tr>
+					<th>文章关键字</th>
+					<td>
+						<input class="span6" name="keyword" id="" type="text" value="{$_GPC['keyword']}">
+					</td>
+				</tr>
+				<tr>
+				 <tr class="search-submit">
+					<td colspan="2"><button class="btn pull-right span2"><i class="icon-search icon-large"></i> 搜索</button></td>
+				 </tr>
+			</tbody>
+		</table>
+		</form>
+	</div>
+	<div style="padding:15px;">
+		<table class="table table-hover table-striped">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="">姓名</th>
+					<th style="">昵称</th>
+					<th style="">手机</th>
+					<th style="">用户ID</th>
+					<th style="">点击次数</th>
+					<th style="">累计奖励积分</th>
+					<th style="">用户系统积分</th>
+					<th style="width:85px; text-align:right;">展开</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $item}
+				<tr>
+					<td>
+						<span>{$fans[$item['track_id']]['realname']}</span>
+					</td>
+					<td>
+						<span>{$fans[$item['track_id']]['nickname']}</span>
+					</td>
+					<td>
+						<span>{$fans[$item['track_id']]['mobile']}</span>
+					</td>
+					<td>
+						<span class='eclipse' title="{$item['track_id']}">{$item['track_id']}</span>
+					</td>
+					<td>
+						<span>{$item['total_click']}</span>
+					</td>
+					<td>
+						<span>{$item['total_credit']}</span>
+					</td>
+					<td>
+						<span>{$fans[$item['track_id']]['credit1']}</span>
+					</td>
+					<td style="text-align:right;">
+						<a href="{php echo $this->createWebUrl('sharetrack', array('do' => 'sharetrack', 'keyword' => $item['title'], 'track_id' => $item['track_id'], 'op' => 'display'))}" title="展开当前用户的所有记录" class="btn btn-mini"><i class="icon-list"></i></a>
+					</td>
+				</tr>
+				{/loop}
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+</div>
+{/if}
+{template 'common/footer'}

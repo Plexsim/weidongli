@@ -1,0 +1,52 @@
+{template wl_header} 
+<link href='./source/modules/shopping2/style/css/cart.css' rel='stylesheet' type='text/css' />
+<script language="javascript">$(document).ready(shop_obj.page_init);</script>
+<div id="shop_page_contents">
+	<div id="cover_layer"></div>
+	{template wl_menu} 
+	<div id="cart">
+	{if empty($goods)}
+	<div class="empty">
+			<img src="./source/modules/shopping2/style/images/cart.png" /><br />
+			购物车空的，赶快去逛逛吧！
+	</div>
+	{else}
+	<script language="javascript">$(document).ready(shop_obj.cart_init);</script>
+		<form id="cart_form" action="{php echo $this->createMobileUrl('wlcart');}">
+			{loop $goods $row}
+			<div class="item">
+				<div class="del"><div CId="{$cart[$row['id']]['id']}"><img src="/source/modules/shopping2/style/images/del.gif" /></div></div>
+				<div class="img"><a href="{php echo $this->createMobileUrl('wldetail', array('goodsid' => $row['id']));}"><img src="{$row['thumb']}"></a></div>
+				<dl class="info">
+					<dd class="name"><a href="{php echo $this->createMobileUrl('wldetail', array('goodsid' => $row['id']));}">{$row['title']}</a></dd>
+					<dd class="price">价格:<span>￥{$row['marketprice']}</span></dd>
+										<dd class="sub_total" ProId="{$row['id']}" id="c_{$cart[$row['id']]['id']}">
+						数量: <input type="text" name="Qty[]" value="{$cart[$row['id']]['total']}" maxlength="3" pattern="[0-9]*" class="input_text"/>
+						<span>小计:<span class="fc_red"></span></span>
+						<input type="hidden" name="CId[]" value="{$cart[$row['id']]['id']}" />
+					</dd>
+				</dl>
+				<div class="clear"></div>
+			</div>
+			{/loop}
+			<div class="total">商品总价:<span class="fc_red"></span></div>
+			<div class="checkout"><input type="button" value="去结算" /></div>
+			<input type="hidden" name="d" value="list" />
+			<input type="hidden" name="a" value="update" />
+		</form>
+	</div>
+	{/if}
+</div>
+ {template wl_footer}
+<script type="text/javascript">
+    $('.input_text').focus(function() {
+        $("#footer_points").css("display","none");
+        $("#footer").css("display","none");
+        $("#category").css("display","none");
+    });
+    $('.input_text').blur(function() {
+        $("#footer_points").css("display","");
+        $("#footer").css("display","");
+        $("#category").css("display","");
+    });
+</script>

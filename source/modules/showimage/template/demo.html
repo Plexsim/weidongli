@@ -1,0 +1,66 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li {if $operation == 'manage'}class="active"{/if} ><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'manage'));}">管理</a></li>
+    <li {if $operation == 'start_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'start_add'));}">开场静态页</a></li>
+    <li {if $operation == 'audio_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'audio_add'));}">音频添加</a></li>
+    <li {if $operation == 'picture_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'picture_add'));}">图片添加</a></li>
+    <li {if $operation == 'share'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'share'));}">设置分享</a></li>
+    <li {if $operation == 'play_order'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'play_order'));}">播放顺序</a></li>
+</ul>
+{if $operation == manage}
+<div class="main">
+    <div class="stat">
+        <div class="stat-div">
+    <div class="sub-item">
+        <div class="sub-item">
+            <div class="pull-left">
+                当前匹配音频文件名:{$demo['title']}</br>
+                当前效果匹配地址：{$_W['siteroot']}mobile.php?act=module&name=showimage&do=demo&weid={$_W['weid']}&typeid={$typeId}
+            </div>
+            <div class="pull-right">
+                <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+                    <input type="hidden" name="alldelete" value="1"/>
+                    <input name="submit" type="submit" value="清空" class="btn btn-primary span2">
+                    <input type="hidden" name="token" value="{$_W['token']}" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div style="padding:15px;">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:100px;">图片</th>
+                <th style="width:100px;">文字图</th>
+                <th style="width:100px;">渐变图</th>
+                <th style="width:100px;">播放序号</th>
+                <th style="text-align:right; min-width:60px;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {loop $list $item}
+            <tr>
+                <td>{if !empty($item['picture1'])}<img src="{$_W['attachurl']}{$item['picture1']}" width="80px"/>{/if}</td>
+                <td>{if !empty($item['picture2'])}<img src="{$_W['attachurl']}{$item['picture2']}" width="80px"/>{/if}</td>
+                <td>{if !empty($item['picture3'])}<img src="{$_W['attachurl']}{$item['picture3']}" width="80px"/>{/if}</td>
+                <td>{$item['sindex']}</td>
+                <td style="text-align:right;">
+                    {if $types['model'] == 1}
+                    <a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'add_id' => $item['id'], 'op' => 'picture_add'))}" title="编辑" class="btn btn-small"><i class="icon-edit"></i></a>
+                    {/if}
+                    <a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'order_id' => $item['id'], 'op' => 'order_maxup'))}" title="最上" class="btn btn-small"><i class="icon-double-angle-up"></i></a>
+                    <a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'order_id' => $item['id'], 'op' => 'order_maxdown'))}" title="最下" class="btn btn-small"><i class="icon-double-angle-down"></i></a>
+                    <a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'order_id' => $item['id'], 'op' => 'order_up'))}" title="上调" class="btn btn-small"><i class="icon-arrow-up"></i></a>
+                    <a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'order_id' => $item['id'], 'op' => 'order_down'))}" title="下调" class="btn btn-small"><i class="icon-arrow-down"></i></a>
+                    <a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'delete_id' => $item['id'], 'op' => 'delete'))}" onclick="return confirm('此操作不可恢复，确认删除？');return false;" title="删除" class="btn btn-small"><i class="icon-remove"></i></a>
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+    </div>
+            </div>
+        </div>
+</div>
+{/if}
+{template 'common/footer'}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.51,0.52">
+	<application setting="true">
+		<name><![CDATA[照片墙]]></name>
+		<identifie><![CDATA[photos]]></identifie>
+		<version><![CDATA[0.3]]></version>
+		<type><![CDATA[services]]></type>
+		<ability><![CDATA[照片墙]]></ability>
+		<description><![CDATA[照片墙]]></description>
+		<author><![CDATA[珊瑚海]]></author>
+		<url><![CDATA[http://bbs.b2ctui.com/]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+			<message type="image" />
+		</handles>
+		<rule embed="false" />
+	</platform>
+	<bindings>
+		<cover>
+			<entry title="照片墙入口设置" do="display" />
+        </cover>
+        <home>
+			<entry title="照片墙" do="display" />
+        </home>
+		<menu>
+			<entry title="图片管理" do="display" state="" direct="false" />
+		</menu>
+	</bindings>
+	<install><![CDATA[CREATE TABLE IF NOT EXISTS `ims_photos_data` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL,
+  `from_user` varchar(50) NOT NULL,
+  `url` varchar(200) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `status` tinyint(1) unsigned NOT NULL,
+  `time` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `ims_photos_comment` (
+  `pid` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `weid` int(10) unsigned NOT NULL,
+  `from_user` varchar(50) NOT NULL,
+  `time` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`pid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;]]></install>
+	<uninstall><![CDATA[DROP TABLE IF EXISTS `ims_photos_data`;
+DROP TABLE IF EXISTS `ims_photos_comment`;]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

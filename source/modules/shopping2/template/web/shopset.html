@@ -1,0 +1,79 @@
+{template 'common/header'}
+<link rel="stylesheet" type="text/css" href="./source/modules/shopping2/style/css/uploadify_t.css?2014-01-28-1" media="all" />
+<ul class="nav nav-tabs">
+	<li class="active"><a href="{php echo $this->createWebUrl('shopset')}">基本设置</a></li>
+	<li><a href="{php echo $this->createWebUrl('mailset')}">邮件设置</a></li>
+	<li><a href="{php echo $this->createWebUrl('printset')}">打印机设置</a></li>	
+	<li><a href="{php echo $this->createWebUrl('smsset')}">短信设置</a></li>		
+</ul>
+
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+	<input type="hidden" name="parentid" value="{$set['id']}" />
+		<h4>商城基本设置</h4>
+		<table class="tb">
+			<tr>
+				<th><label for="">网站名称</label></th>
+				<td>
+					<input type="text" name="shop_name" class="span6" value="{$set['shop_name']}" />
+				</td>
+			</tr>
+			<tr>
+				<th><label for="">幻灯图片</label></th>
+				<td>
+					<div id="upimg_main">
+						<div id="file_upload" class="uploadify">
+						<span class="btn btn-file"><span class="fileupload-new" id="file_upload-button">选择图片</span></span><span class="maroon">*</span></div>						
+						<ul class="ipost-list ui-sortable" id="fileList">
+							{loop $set['thumbArr'] $row}
+							<li class="imgbox"><a class="thumb_close" href="javascript:void(0)" title="删除"></a>  
+							<input type="hidden" value="{$row}" name="thumb_url[]">
+							<span class="item_box"><img src="{$row}"></span>
+							</li>
+							{/loop}
+ 						</ul>
+						<div id="file_upload_queue" class="uploadifyQueue"></div>
+					</div>
+
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					<input name="submit" type="submit" value="提交" class="btn btn-primary span3">
+					<input type="hidden" name="id" value="{$set['id']}" />
+					<input type="hidden" name="token" value="{$_W['token']}" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript" src="./resource/script/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript" src="./resource/script/kindeditor/lang/zh_CN.js"></script>
+<link type="text/css" rel="stylesheet" href="./resource/script/kindeditor/themes/default/default.css" />
+ <script type="text/javascript">
+var editor = KindEditor.editor({
+	allowFileManager : true,
+	uploadJson : "./index.php?act=attachment&do=upload",
+	fileManagerJson : "./index.php?act=attachment&do=manager",
+	 
+	});
+	$("#file_upload-button").click(function() {
+		editor.loadPlugin("image", function() {
+		editor.plugin.imageDialog({
+			imageUrl : $("#upload-image-url-thumb").val(),
+			clickFn : function(url) {
+				editor.hideDialog();
+				var filename = /images(.*)/.exec(url);
+					html='<li class="imgbox"><a class="thumb_close" href="javascript:void(0)" title="删除"></a><input type="hidden" value="'+url+'" name="thumb_url[]"><span class="item_box"><img src="'+url+'"></span></li>';
+					$("#fileList").append(html);
+			}
+		});
+	});
+});
+        $("a.thumb_close").live("click ", function (n) {
+           $(this).parent().remove();
+        });
+
+</script>	
+{template 'common/footer'}

@@ -1,0 +1,32 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li {if $operation == 'manage'}class="active"{/if} ><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'manage'));}">管理</a></li>
+    <li {if $operation == 'start_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'start_add'));}">开场静态页</a></li>
+    <li {if $operation == 'audio_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'audio_add'));}">音频添加</a></li>
+    <li {if $operation == 'picture_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'picture_add'));}">图片添加</a></li>
+    <li {if $operation == 'share'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'share'));}">设置分享</a></li>
+    <li {if $operation == 'play_order'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'play_order'));}">播放顺序</a></li>
+</ul>
+<div class="main">
+<form action="" class="form-horizontal form" method="post" enctype="multipart/form-data">
+    <h4>添加</h4>
+    <table class="tb">
+        <tr>
+            <th><label for="">开场静态图</label></th>
+            <td>
+               {php echo tpl_form_field_image('start_picture', $demo['start_picture']);}
+                <span class="help-block"></span>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <button type="submit" class="btn btn-primary span2" name="submit" value="提交">提交</button> &nbsp;&nbsp;
+                <input type="button" class="btn btn-primary span2" value="清除" onclick="javascript:window.location.href='{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'start_add','delete_id'=>$demo['id']));}'"/>
+                <input type="hidden" name="token" value="{$_W['token']}" />
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+{template 'common/footer'}

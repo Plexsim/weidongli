@@ -1,0 +1,40 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li {if $operation == 'manage'}class="active"{/if} ><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'manage'));}">管理</a></li>
+    <li {if $operation == 'start_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'start_add'));}">开场静态页</a></li>
+    <li {if $operation == 'audio_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'audio_add'));}">音频添加</a></li>
+    <li {if $operation == 'picture_add'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'picture_add'));}">图片添加</a></li>
+    <li {if $operation == 'share'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'share'));}">设置分享</a></li>
+    <li {if $operation == 'play_order'}class="active"{/if}><a href="{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'play_order'));}">播放顺序</a></li>
+</ul>
+<div class="main">
+    <form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{$item['id']}" />
+        <h4>编辑信息</h4>
+        <table class="tb">
+            <tr>
+                <th><label for="">音频上传</label></th>
+                <td>
+                    <input type="file" name="audio" id="audio" />
+                </td>
+            </tr>
+
+            <tr>
+                <th><label for="">当前文件名</label></th>
+                <td>
+                    {$item['title']}
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <input name="submit" type="submit" value="提交" class="btn btn-primary span2">&nbsp;&nbsp;
+                    <input type="button" class="btn btn-primary span2" value="清除" onclick="javascript:window.location.href='{php echo create_url('site/module/demo', array('name' => 'showimage','type_id'=>$typeId, 'op' => 'audio_add','delete_id'=>$item['id']));}'"/>
+                    <input type="hidden" name="token" value="{$_W['token']}" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+{template 'common/footer'}

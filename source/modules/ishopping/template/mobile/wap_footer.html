@@ -1,0 +1,27 @@
+<div id="footer_points"></div>
+<footer id="footer">
+	<ul>
+		<li class="category"><a href="#">分类</a></li>
+        <li class="home"><a href="{php echo $this->createMobileUrl('wapindex')}">首页</a></li>
+		<li class="cart"><a href="{php echo $this->createMobileUrl('wapcart')}">购物车</a></li>
+		<li class="member"><a href="{php echo $this->createMobileUrl('wapmember')}">我的</a></li>
+	</ul>
+</footer>
+<div id="category">
+	<div class="close"></div>
+	<dl>
+		{loop $category $item}
+		<dt><a href="{php echo $this->createMobileUrl('waplist', array('cateid' => $item['id']))}">{$item['name']}</a></dt>
+			{loop $children[$item['id']] $citem}
+			<dd><a  href="{php echo $this->createMobileUrl('waplist', array('cateid' => $citem['id']))}">&gt; {$citem['name']}</a></dd>
+			{/loop}	
+		{/loop}
+	</dl>
+</div>
+<script type="text/javascript">
+    document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+        WeixinJSBridge.call('hideToolbar');
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="white">
+<link href="/source/modules/quanjing/template/css/view.css" rel="stylesheet">
+<title>{$info[title]}</title>
+</head>
+<body>
+	<div class="view_full" style="width: 100%; height: 100%; z-index:1; min-width: 320px; background: url({$info['picturl']});background-size:cover; position:relative;">
+		<div class="view_select">
+        <table width="95%" border="0" align="center" cellpadding="0" cellspacing="0" class="view_list" style="margin-top:200px;">
+          <tr>
+            <td>
+            	<ul style="margin-left: 23px;">      
+                {loop $list $row}
+                    <li>
+                    <a style=" width:auto; padding:10px 15px; line-height:20px;" href="{php echo create_url('index/module/view', array('name' => 'quanjing','weid' => $row['weid'],'sid'=>$row['sid']));}" target="_blank">{$row['title']}</a>
+                    </li>                               
+                {/loop}
+            </ul> 
+            </td>
+          </tr>
+        </table>
+        </div>
+        <div class="view_house" style="opacity: 1; "><a id="currPlace" href="javascript:void(0);">{$info[banquan]}</a></div>
+	</div>
+</body>
+</html>

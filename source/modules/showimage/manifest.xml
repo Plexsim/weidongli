@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.51,0.52">
+	<application setting="false">
+		<name><![CDATA[微画报ui版]]></name>
+		<identifie><![CDATA[showimage]]></identifie>
+		<version><![CDATA[1.3]]></version>
+		<type><![CDATA[wdlshow]]></type>
+		<ability><![CDATA[微画报ui版小巧版，但功能扩展十分了得.]]></ability>
+		<description><![CDATA[微画报ui版小巧版，但功能扩展十分了得.]]></description>
+		<author><![CDATA[微动力]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="false" />
+	</platform>
+	<bindings>
+        <menu>
+            <entry title="效果分类管理" do="type" />
+          
+        </menu>
+	</bindings>
+	<install><![CDATA[
+            CREATE TABLE `ims_showimage_demo` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `wid` int(10) DEFAULT NULL,
+  `music` varchar(200) DEFAULT NULL COMMENT '播放路径',
+  `type` int(10) DEFAULT NULL COMMENT '1  就代表类别1',
+  `title` varchar(50) DEFAULT NULL,
+  `picture` varchar(200) DEFAULT NULL COMMENT '遮盖图',
+  `start_picture` varchar(200) DEFAULT NULL COMMENT '首页加载图',
+  `share` varchar(200) DEFAULT NULL,
+  `play_order` tinyint(5) DEFAULT NULL,
+  `share_picture` varchar(300) DEFAULT NULL COMMENT '分享图片',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+CREATE TABLE `ims_showimage_picture` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `wid` int(10) DEFAULT NULL,
+  `sid` int(10) DEFAULT NULL COMMENT '对应的类别',
+  `picture1` varchar(200) DEFAULT NULL COMMENT '图片路径',
+  `picture2` varchar(200) DEFAULT NULL COMMENT '动态图片',
+  `time` varchar(100) DEFAULT NULL,
+  `sindex` int(10) DEFAULT NULL COMMENT '播放位置',
+  `picture3` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ims_showimage_type` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `wid` int(10) DEFAULT NULL,
+  `model` tinyint(5) DEFAULT NULL COMMENT '1为效果1  2为效果2',
+  `title` varchar(50) DEFAULT NULL COMMENT '分类名称',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+            ]]></install>
+	<uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

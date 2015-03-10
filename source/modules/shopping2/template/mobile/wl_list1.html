@@ -1,0 +1,29 @@
+{template wl_header} 
+<link href='/source/modules/shopping2/style/css/products.css?t=20140127' rel='stylesheet' type='text/css' />
+<link href='/source/modules/shopping2/style/css/products_media.css?t=20140127' rel='stylesheet' type='text/css' />
+<div id="shop_page_contents">
+	<div id="cover_layer"></div>
+	{template wl_menu} 
+	<div id="products">
+		<div class="station"><a>产品展示</a></div>
+		<div class="list-0">
+			{loop $list $row}
+			<a href="{php echo $this->createMobileUrl('wldetail', array('goodsid' => $row['id']));}">
+				<div class="item">
+					<div class="img"><img src="{$row['thumb']}"></div>
+					<div class="info">
+						<h1>{$row['title']}</h1>
+						<h2>￥{$row['marketprice']}</h2>
+						<h3>{$row['description']}</h3>
+					</div>
+					<div class="detail"><span></span></div>
+				</div>
+			</a>
+			{/loop}
+		</div>
+		<div id="turn_page">
+		{$pager}
+		</div>
+	</div>
+</div>
+{template wl_footer} 	

@@ -1,0 +1,53 @@
+{template 'header'}
+<form action="" method="post">
+<input type="hidden" name="id" value="{$goodsid}" />
+<div class="mobile-img">
+	{if !empty($goods['thumb'])}<img src="{$_W['attachurl']}{$goods['thumb']}" />{/if}
+</div>
+<div class="mobile-div img-rounded">
+	<div class="mobile-hd">商品详细描述</div>
+	<div class="mobile-content">
+		{$goods['content']}
+	</div>
+</div>
+<div class="mobile-div img-rounded">
+	<div class="mobile-hd">商品其他信息</div>
+	<div class="mobile-content">
+		<table class="form-table">
+			<tr>
+				<th>名称</th>
+				<td><span class="uneditable-input">{$goods['title']}</span></td>
+			</tr>
+			<tr>
+				<th>售价</th>
+				<td><span class="uneditable-input">{$goods['marketprice']}/{$goods['unit']}</span></td>
+			</tr>
+			{if $goods['type'] == 1}
+			<tr>
+				<th>商品编号</th>
+				<td><span class="uneditable-input">{$goods['goodssn']}</span></td>
+			</tr>
+			<tr>
+				<th>条形码</th>
+				<td><span class="uneditable-input">{$goods['productsn']}</span></td>
+			</tr>
+			{/if}
+			{if $goods['total'] != -1}
+			<tr>
+				<th>库存</th>
+				<td><span class="uneditable-input">{$goods['total']}</span></td>
+			</tr>
+			{/if}
+			<tr>
+				<th>购买数量</th>
+				<td><input type="text" name="count" value="1" /></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="mobile-submit">
+	<input type="hidden" name="token" value="{$_W['token']}" />
+	<input type="submit" name="submit" class="btn btn-success btn-large submit" style="width:100%;" value="购买">
+</div>
+</form>
+{template 'footer'}

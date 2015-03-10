@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.51,0.52">
+	<application setting="true">
+		<name><![CDATA[违章查询]]></name>
+		<identifie><![CDATA[yobyweizhang]]></identifie>
+		<version><![CDATA[1.0.0]]></version>
+		<type><![CDATA[services]]></type>
+		<ability><![CDATA[一个用来查询车辆违章的工具]]></ability>
+		<description><![CDATA[查询违章的工具,数据来自聚合网的api接口]]></description>
+		<author><![CDATA[Yoby]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+		</handles>
+		<rule embed="false" />
+	</platform>
+	<bindings>
+	</bindings>
+	<install><![CDATA[]]></install>
+	<uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

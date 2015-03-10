@@ -1,0 +1,180 @@
+{template 'common/header'}
+<style>
+.alert { font-family:"微软雅黑"; font-size:14px !important; font-weight:normal;}
+input.span7,
+textarea.span7,
+.uneditable-input.span7 {
+  width: 100%;
+  min-height:40px;
+}
+.info-edit-cover{width:99%; background:#FFF; height:auto; margin-bottom:10px;}
+</style>
+<ul class="nav nav-tabs">
+    <li class=""><a href="{php echo create_url('site/module/list', array('name' => 'quanjing'));}">全景列表</a></li>
+    <li class="active"><a href="{php echo create_url('site/module/create', array('name' => 'quanjing'));}">创建3D全景</a></li>
+    <li class=""><a href="{php echo create_url('site/module/set', array('name' => 'quanjing'));}">全景配置</a></li>
+</ul>
+<div class="main" style="width:98%; margin-top:10px; height:90%;">
+<form class="form-horizontal form" action="{$url_action}" method="post" enctype="multipart/form-data">
+	<table style="width:100%">
+		<tbody>  
+        	<tr>
+				<th valign="top">全景名称</th>
+				<td>
+					<input type="text" id="" class="span7" placeholder="" name="title" value="{$info['title']}">
+				</td>
+			</tr>   
+			<tr>
+				<th width="13%" align="center" valign="middle">前</th>
+				<td width="87%">
+					<div id="" class="uneditable-input info-edit-cover">
+						<div class="detail">
+							<span class="pull-right">大图片建议尺寸：700像素 * 700像素</span>
+							<input type="button" id="card-picture" fieldname="p_1" class="btn btn-mini info-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+							<button type="button" class="btn btn-mini info-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'card-picture-value')" style="{if empty($info['p1'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+						</div>
+						{if !empty($info['p1'])}
+						<input type="hidden" name="p_1" value="{$info['p1']}">
+						<div id="upload-file-view" class="upload-view">
+							<input type="hidden" id="card-picture-value" value="{$info['p1']}">
+							<img width="100" src="{$info['p1']}">&nbsp;&nbsp;
+						</div>
+						{else}
+						<div id="upload-file-view"></div>
+						{/if}
+					</div>
+				</td>
+			</tr>
+            <tr>
+				<th width="13%" align="center" valign="middle">右</th>
+				<td width="87%">
+					<div id="" class="uneditable-input info-edit-cover">
+						<div class="detail">
+							<span class="pull-right">大图片建议尺寸：700像素 * 700像素</span>
+							<input type="button" id="card-picture" fieldname="p_2" class="btn btn-mini info-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+							<button type="button" class="btn btn-mini info-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'card-picture-value')" style="{if empty($info['p2'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+						</div>
+						{if !empty($info['p2'])}
+						<input type="hidden" name="p_2" value="{$info['p2']}">
+						<div id="upload-file-view" class="upload-view">
+							<input type="hidden" id="card-picture-value" value="{$info['p2']}">
+							<img width="100" src="{$info['p2']}">&nbsp;&nbsp;
+						</div>
+						{else}
+						<div id="upload-file-view"></div>
+						{/if}
+				  </div>
+			  </td>
+		  </tr>
+            <tr>
+				<th width="13%" align="center" valign="middle">后</th>
+				<td width="87%">
+					<div id="" class="uneditable-input info-edit-cover">
+						<div class="detail">
+							<span class="pull-right">大图片建议尺寸：700像素 * 700像素</span>
+							<input type="button" id="card-picture" fieldname="p_3" class="btn btn-mini info-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+							<button type="button" class="btn btn-mini info-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'card-picture-value')" style="{if empty($info['p3'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+						</div>
+						{if !empty($info['p3'])}
+						<input type="hidden" name="p_3" value="{$info['p3']}">
+						<div id="upload-file-view" class="upload-view">
+							<input type="hidden" id="card-picture-value" value="{$info['p3']}">
+							<img width="100" src="{$info['p3']}">&nbsp;&nbsp;
+						</div>
+						{else}
+						<div id="upload-file-view"></div>
+						{/if}
+				  </div>
+			  </td>
+		  </tr>
+            <tr>
+				<th width="13%" align="center" valign="middle">左</th>
+				<td width="87%">
+					<div id="" class="uneditable-input info-edit-cover">
+						<div class="detail">
+							<span class="pull-right">大图片建议尺寸：700像素 * 700像素</span>
+							<input type="button" id="card-picture" fieldname="p_4" class="btn btn-mini info-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+							<button type="button" class="btn btn-mini info-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'card-picture-value')" style="{if empty($info['p4'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+						</div>
+						{if !empty($info['p4'])}
+						<input type="hidden" name="p_4" value="{$info['p4']}">
+						<div id="upload-file-view" class="upload-view">
+							<input type="hidden" id="card-picture-value" value="{$info['p4']}">
+							<img width="100" src="{$info['p4']}">&nbsp;&nbsp;
+						</div>
+						{else}
+						<div id="upload-file-view"></div>
+						{/if}
+				  </div>
+			  </td>
+		  </tr>
+            <tr>
+				<th width="13%" align="center" valign="middle">上</th>
+				<td width="87%">
+					<div id="" class="uneditable-input info-edit-cover">
+						<div class="detail">
+							<span class="pull-right">大图片建议尺寸：700像素 * 700像素</span>
+							<input type="button" id="card-picture" fieldname="p_5" class="btn btn-mini info-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+							<button type="button" class="btn btn-mini info-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'card-picture-value')" style="{if empty($info['p5'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+						</div>
+						{if !empty($info['p5'])}
+						<input type="hidden" name="p_5" value="{$info['p5']}">
+						<div id="upload-file-view" class="upload-view">
+							<input type="hidden" id="card-picture-value" value="{$info['p5']}">
+							<img width="100" src="{$info['p5']}">&nbsp;&nbsp;
+						</div>
+						{else}
+						<div id="upload-file-view"></div>
+						{/if}
+				  </div>
+			  </td>
+		  </tr>
+            <tr>
+				<th width="13%" align="center" valign="middle">下</th>
+				<td width="87%">
+					<div id="" class="uneditable-input info-edit-cover">
+						<div class="detail">
+							<span class="pull-right">大图片建议尺寸：700像素 * 700像素</span>
+							<input type="button" id="card-picture" fieldname="p_6" class="btn btn-mini info-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+							<button type="button" class="btn btn-mini info-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'card-picture-value')" style="{if empty($info['p6'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+						</div>
+						{if !empty($info['p6'])}
+						<input type="hidden" name="p_6" value="{$info['p6']}">
+						<div id="upload-file-view" class="upload-view">
+							<input type="hidden" id="card-picture-value" value="{$info['p6']}">
+							<img width="100" src="{$info['p6']}">&nbsp;&nbsp;
+						</div>
+						{else}
+						<div id="upload-file-view"></div>
+						{/if}
+				  </div>
+			  </td>
+	  	  </tr>
+            <tr>
+				<th valign="top"></th>
+				<td>
+				  <button type="submit" class="btn btn-primary span3" name="submit" value="提交">提交</button>
+                    <input type="hidden" name="action" value="create">
+                    <input type="hidden" name="weid" value="{$weid}">
+                    <input type="hidden" name="sid" value="{$sid}">
+				</td>
+			</tr>
+            <!--<tr>
+				<th valign="top"></th>
+				<td>
+				  <a href="{php echo create_url('index/module/view', array('name' => 'quanjing','weid' => $weid));}" target="_blank">预览</a>
+				</td>
+			</tr>-->
+	  </tbody>
+	</table>
+    </form>
+ </div>
+<script type="text/javascript">
+kindeditorUploadBtn($('#card-picture'));
+kindeditor($('.richtext-clone'));
+	$('.info-edit-cover-upload').each(function(){
+		kindeditorUploadBtn($(this));
+	});
+</script>
+
+{template 'common/footer'}

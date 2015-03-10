@@ -1,0 +1,48 @@
+{template 'header'}
+<style>
+  img{max-width:100%!important;}
+  #mbutton{padding:15px 10px 15px 10px; overflow:hidden;}
+  #mbutton > span{float:right; display:inline-block; background:#58a3ff; border:1px #63a0eb solid; color:#FFF; height:30px; line-height:30px; padding:0 10px; margin-left:10px;}
+</style>
+<link rel="stylesheet" type="text/css" href="./source/modules/quickshare3/template/mobile/reset.css?2014-02-25-10" media="all" />
+<link rel="stylesheet" type="text/css" href="./source/modules/quickshare3/template/mobile/common.css?2014-02-25-10" media="all" />
+<link rel="stylesheet" type="text/css" href="./source/modules/quickshare3/template/mobile/peak-3.css?2014-02-25-10" media="all" />
+<link rel="stylesheet" type="text/css" href="./source/modules/quickshare3/template/mobile/share_and_recommond.css" />
+<script type="text/javascript" src="./source/modules/quickshare3/template/mobile/jQuery.js?2014-02-25-10"></script>
+<div class="body" style="padding-bottom:60px;">
+  <section class="news_article">
+  <header>
+  <h3 style="font-size:16px;">{$detail['title']}</h3>
+  {data module="quicksignature" func="get_signature" position="top" return="true" assign="result"}
+  {php echo $result}
+  <small class="gray">作者:{$detail['author']}&nbsp;&nbsp;出处:{$detail['source']}&nbsp;&nbsp;{if $detail['max_credit'] - $consumed > 0}剩余积分:{php echo $detail['max_credit'] - $consumed;}{/if}</small>
+  </header>
+  {data module="quicksignature" func="get_signature" position="middle" return="true" assign="result"}
+  {php echo $result}
+  <article>{$detail['content']}</article>
+  <article>
+  {data module="quicksignature" func="get_signature" position="bottom" return="true" assign="result"}
+  {php echo $result}
+  </article>
+  </section>
+</div>
+
+{template 'duoshuo'}
+
+<div id="mbutton">
+  <span class="img-rounded"><i class="icon-home"></i><a style="color:white" href="{php echo create_url('mobile/channel', array('name'=>'index', 'weid'=>$_W['weid']))}">首页</a></span>
+	<span class="img-rounded" onclick="$('#mcover').show()"><i class="icon-share-alt"></i> 转发</span>
+	<span class="img-rounded" onclick="$('#mcover').show()"><i class="icon-group"></i> 分享</span>
+</div>
+<div id="mcover" onclick="$(this).hide()" style="display:none"><img src="./source/modules/quickshare3/template/image/guide.png"></div>
+
+{template 'recommend'}
+
+<div class="clear"></div>
+
+<script>
+$(function() {
+});
+</script>
+{php $_share_content = $detail['content'];}
+{template 'footer'}

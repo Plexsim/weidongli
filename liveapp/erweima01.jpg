@@ -1,0 +1,211 @@
+<!DOCTYPE html> 
+<html lang="zh-CN" class="static common"> 
+<head>
+<meta charset="utf-8" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title>未找到页面 - 云起轻应用</title>
+<link href="/Themes/Cloud7Global/Styles/Cloud7-Global.css" rel="stylesheet" type="text/css" />
+<meta content="Web7" name="generator" />
+<meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport" />
+<link href="/Media/Default/Pics/2014421181453323JIDE.jpeg-fav.ico" rel="shortcut icon" type="image/x-icon" />
+<link href="/Media/Default/Pics/2014421181453323JIDE.jpeg-touch.png" rel="apple-touch-icon" type="image/x-icon" />
+<script src="/Apps/Web7.Scripts/scripts/html5.js" type="text/javascript"></script>
+<script src="/Apps/Web7.jQuery/scripts/jquery-1.7.1.js" type="text/javascript"></script>
+    <style>
+        @media only screen and (device-height: 668px){
+          #footer{
+            margin-top: 6.125em;
+          }
+    }
+    </style>
+
+
+    <script type="text/javascript" src="http://cloud7analytics.qiniudn.com/piwik.js"></script>
+    <script type="text/javascript">
+        window.cloud7Analytics = Piwik;
+        window.cloud7Analytics.doTrace = function (urlref) {
+            var tracker = Piwik.getTracker();
+            //tracker.setSiteId(3);
+            tracker.setTrackerUrl("http://analytics.cloud7.com.cn/piwik/piwik.php");
+            tracker.enableLinkTracking();
+            tracker.setDocumentTitle(document.domain + "/" + document.title);
+            tracker.setCustomUrl(window.location.href);
+            tracker.setReferrerUrl(urlref || document.referrer || window.parent.document.referrer || window.top.document.referrer);
+            tracker.trackPageView();
+        };
+        window.cloud7Analytics.doTrace();
+    </script>
+</head> 
+<body>
+
+<div id="layout-wrapper">
+<a href="" name="top"></a>
+<div id="content">
+	<!-- header start -->
+	<div class="layout_header">
+	<div class="layout">
+		<a href="/" title="首页" class="hd_logo">
+			<img src="yunqi-logo.png" alt="Cloud7·云起">
+		</a>
+		<div class="nav">
+            <div class="nav-menu">
+                <a href="/Cloud7Global/Page/AboutLightApps">什么是轻应用？</a>
+                
+                
+                <a href="/Cloud7Global/Page/Features">功能</a>
+                <a href="/Cloud7Global/Page/Design">设计</a>
+                
+                <a href="/Chuye" class="chuye">初页</a>
+                <a href="http://bbs.cloud7.com.cn" target="_blank">社区</a>
+			    
+            </div>
+                <span class="account-wrapper">
+                    <a class="hd_login_btn" href="/Cloud7/Account/LogOn?ReturnUrl=%2FThemes%2FCloud7Global%2FStyles%2FImages%2Ferweima01.jpg">登录</a>
+                </span>
+                <a class="floata" href="/Cloud7/Account/Register">注册</a>
+                
+		</div>
+	</div>		
+</div>
+
+<script>
+    (function () {
+        $(".layout_header .nav-menu a").each(function () {
+            if ($(this).attr("href") == window.location.pathname) {
+                $(this).addClass("selected");
+            }
+        });
+    })();
+</script>
+
+
+    <!-- header end -->
+    
+    <!-- body start -->
+    <div class="layout_body" id="page">
+                <div id="content" class="group">
+                    <div class="zone zone-content">
+
+<h1>未找到页面</h1>
+<p>找不到您所需要的页面。</p>
+
+</div>
+                </div>
+    </div>
+    <!-- body end -->
+
+    <!-- footer start -->
+	<div class="erweima_wrap">
+				<div class="maskLayer">				
+				</div>
+				<div class="erweima">
+					<span></span>
+					<img src="erweima01.jpg" alt="" />
+					<p>GMIC全球互联网大户</p>
+				</div>
+			</div>	
+<div class="layout_footer" id="footer">
+<div class="layout">
+    <a href="" name="bottom"></a>
+    <div class="ft_ie">
+        <h2 class="fl_l">再小的品牌，也可以打动人心</h2>
+        <div class="clear po_r" >
+            <a href="/page/18966">关于云起</a>
+            <a href="/page/8064">工作机会</a>
+            <a href="/page/18963">联系云起</a>
+        </div>
+        <div class="layout_footer_right">
+            <a href="http://weibo.com/cloud7team" target="_blank" class="ft_sina"></a>
+            <a href data-dialogimg="/Themes/Cloud7Global/Content/wechat_cloud7lapp.jpg" data-dialogtext="云起轻应用" class="ft_weixin"></a>
+            <a href="http://wpa.qq.com/msgrd?v=3&uin=2899533023&site=qq&menu=yes" target="_blank" class="ft_qq"></a>
+            <a href="http://www.cloud7.com.cn/blog/18968" class="ft_weibo"></a>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- footer end -->
+</div>
+
+</div>
+
+<script>
+    window.MediaPublicUrlSeed = "/Media/Default/";
+    $("article img").each(function () {
+        var src = $(this).attr("src");
+        $(this).attr("src", $.ImageSizePath(src, "original", true));
+    });
+</script>
+
+
+<script src="/Apps/Web7.Scripts/scripts/qqservice.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        //control_mask
+        $('.erweima span').click(function() {
+            $('.erweima_wrap').hide();
+            $("body").removeClass('overflow');
+        });
+
+        $('[data-dialogimg][data-dialogtext]').click(function (e) {
+            e.preventDefault();
+            var imgpath = $(this).attr("data-dialogimg");
+            var text = $(this).attr("data-dialogtext");
+            $('.erweima_wrap').find("img").attr("src", imgpath);
+            $('.erweima_wrap').find("p").text(text);
+            e.stopPropagation();
+            $('.erweima_wrap').show();
+            return false;
+        });
+        //slidebar_toggle
+        $('.lightApp_slidebar a').mouseover(function() {
+            $(this).addClass('slidebar_on');
+        }).mouseout(function() {
+            $(this).removeClass('slidebar_on');
+        });
+        //case_mouseover
+        var url;
+        $('.case_img_wrap a').mouseover(function() {
+            url = $(this).find('img').attr("src");
+            $(this).find('img').attr("src", "caseMouseover.png");
+        }).mouseout(function() {
+            $(this).find('img').attr("src", url);
+        });
+
+        function clearText(field, sEventType) {
+            if (field.value == field.defaultValue) {
+                field.value = '';
+            } else if (field.value == '') {
+                field.value = field.defaultValue;
+            }
+            if (sEventType == 'onfucs') {
+                field.className = 'input_email_on';
+            } else if (sEventType == 'onblurs') {
+                field.className = 'input_email_off';
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        function clearText(field, sEventType) {
+            if (field.value == field.defaultValue) {
+                field.value = '';
+            } else if (field.value == '') {
+                field.value = field.defaultValue;
+            }
+            if (sEventType == 'onfucs') {
+                field.className = 'input_email_on';
+            } else if (sEventType == 'onblurs') {
+                field.className = 'input_email_off';
+            }
+        }
+    </script>
+
+
+    <!--statistics-->
+    
+    <img class="hide" src="http://c.cnzz.com/wapstat.php?siteid=1000437618&amp;r=http%3a%2f%2fwww.cloud7.com.cn%2fCloud7Global%2fPage%2fAboutLightApps&amp;rnd=155195319" width="0" height="0" />
+</body>
+</html>

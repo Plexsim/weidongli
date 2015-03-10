@@ -1,0 +1,58 @@
+{template 'common/header'}
+
+<div class="main">
+	<div class="form-horizontal form">
+		<h4>购买模块后，请将下面的信息发送给开发者登记授权。</h4>
+		<table class="tb">
+			<tr>
+				<th>支付宝账号:</th>
+				<td>
+				{php echo empty($settings['user'])?'请在下面设置':$settings['user']}
+				</td>
+			</tr>
+			<tr>
+				<th>联系QQ:</th>
+        <td>
+        {php echo empty($settings['pass'])?'请在下面设置':$settings['pass'];}
+        </td>
+      </tr>
+      <tr>
+				<th>服务器IP:</th>
+				<td>
+          <?php if('/'==DIRECTORY_SEPARATOR){echo $_SERVER['SERVER_ADDR'];}else{echo @gethostbyname($_SERVER['SERVER_NAME']);} ?>
+        </td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<div class="main">
+	<form action="" method="post" class="form-horizontal form">
+		<h4>参数设置</h4>
+		<table class="tb">
+			<tr>
+				<th>支付宝账号</th>
+				<td>
+          <input type="text" name="user" class="span4" value="{$settings['user']}" />
+          <span class="help-block">请填写支付宝账号，以便开发者管理费用到账情况。</span>
+        </td>
+			</tr>
+			<tr>
+				<th>联系QQ</th>
+				<td>
+				<input type="text" name="pass" class="span4" value="{$settings['pass']}" />
+        <span class="help-block">注意：需要进行人工售后的时候，开发者只认从此QQ发出的请求。</span>
+        </td>
+			</tr>
+			<tr>
+				<th></th>
+				<td>
+					<input name="submit" type="submit" value="提交" class="btn btn-primary span3" style="height:30px" />
+					<input type="hidden" name="token" value="{$_W['token']}" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+{template 'common/footer'}

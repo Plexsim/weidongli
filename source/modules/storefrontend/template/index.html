@@ -1,0 +1,19 @@
+<head> 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>分类页面 - 应用首页</title>
+<link href="./source/modules/storefrontend/template/categoryLess.css?v=15" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./source/modules/storefrontend/template/sjqqapi.css?v=2">
+</head>
+<body>
+<div class="category-wrapper clearfix" orgame="1" cateid="0">
+  {template slide}
+  {template notice}
+  {if $force_update == false}
+  {template sidebar}
+  {template applist}
+  {/if}
+</div>
+{template footbar}
+</body>
+</html>

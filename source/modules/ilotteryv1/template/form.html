@@ -1,0 +1,84 @@
+<input type="hidden" name="reply_id" value="{$reply['id']}" />
+<div class="alert alert-block alert-new">
+	<a class="close" data-dismiss="alert">×</a>
+	<h4 class="alert-heading">幸运大抽奖</h4>
+	<table>
+		<tbody>
+            {if !empty($reply)}
+			<tr>
+				<th>详细内容</th>
+				<td>
+                    <a class="btn btn-primary" href="{php echo create_url('site/module', array('do' => 'userlist', 'name' => 'ilotteryv1', 'rid' => $reply['rid']))}" ><i class="icon-user"></i> 用户管理</a>
+                    <a class="btn btn-primary" href="{php echo create_url('site/module', array('do' => 'userform', 'name' => 'ilotteryv1', 'rid' => $reply['rid']))}"><i class="icon-plus"></i> 添加用户</a>
+                    <a class="btn btn-primary" href="{php echo create_url('mobile/module', array('do' => 'index', 'name' => 'ilotteryv1', 'weid' => $_W['weid'], 'rid' => $reply['rid']))}" target="_blank"><i class="icon-home"></i> 抽奖主页</a>
+                    <a class="btn btn-primary" onclick="return confirm('确认清空本次活动的抽奖状态吗？');return false;" href="{php echo create_url('site/module', array('do' => 'CleanState', 'name' => 'ilotteryv1', 'rid' => $rid))}"><i class="icon-remove-sign"></i> 清空状态</a>
+                </td>
+			</tr>
+            {/if}
+            <tr>
+                <th>标题</th>
+                <td>
+                    <input type="text" value="{$reply['title']}" class="span7" name="title">
+                </td>
+            </tr>
+			<tr>
+				<th>封面图片</th>
+				<td>
+                    <div id="" class="uneditable-input reply-edit-cover">
+                        <div class="detail">
+                            <span class="pull-right">大图片建议尺寸：700像素 * 300像素</span>
+                            <input type="button" id="egg-picture" fieldname="picture{$namesuffix}" class="btn btn-mini reply-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+                            <button type="button" class="btn btn-mini reply-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'egg-picture-value')" style="{if empty($reply['picture'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+                        </div>
+                        {if !empty($reply['picture'])}
+                        <input type="hidden" name="picture-old" value="{$reply['picture']}">
+                        <div id="upload-file-view" class="upload-view">
+                            <input type="hidden" id="egg-picture-value" value="{$reply[picture]}">
+                            <img width="500" src="{$_W['attachurl']}{$reply['picture']}">
+                        </div>
+                        {else}
+                        <div id="upload-file-view"></div>
+                        {/if}
+                    </div>
+                    <div class="help-block">用于图文显示的图片</div>
+				</td>
+			</tr>
+			<tr>
+				<th>活动简介</th>
+				<td>
+					<textarea style="height:150px;" name="description" class="span7" cols="60">{$reply['description']}</textarea>
+					<div class="help-block">用于图文显示的简介</div>
+				</td>
+			</tr>
+            <tr>
+                <th>是否只有内定人员能中奖</th>
+                <td>
+                    <label class="radio inline">
+                        <input type="radio" name="only_default_user" value="1" {if empty($reply)}checked="checked"{elseif $reply['only_default_user']==1}checked="checked"{/if} /> 是
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="only_default_user" value="0" {if empty($reply)}checked="checked"{elseif $reply['only_default_user']==0}checked="checked"{/if} /> 否
+                    </label>
+                    <div class="help-block">是否只有内定人员能中奖</div>
+                </td>
+            </tr>
+            <tr>
+                <th>是否允许修改用户信息</th>
+                <td>
+                    <label class="radio inline">
+                    <input type="radio" name="is_change" value="1" {if empty($reply)}checked="checked"{elseif $reply['is_change']==1}checked="checked"{/if} /> 是
+                    </label>
+                    <label class="radio inline">
+                    <input type="radio" name="is_change" value="0" {if empty($reply)}checked="checked"{elseif $reply['is_change']==0}checked="checked"{/if} /> 否
+                    </label>
+                    <div class="help-block">用户报名后是否允许修改信息</div>
+                </td>
+            </tr>
+		</tbody>
+	</table>
+</div>
+
+<script type="text/javascript">
+kindeditor($('#rule'));
+kindeditorUploadBtn($('#egg-picture'));
+</script>

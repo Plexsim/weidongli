@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.51">
+	<application setting="false">
+		<name><![CDATA[幸运大抽奖v1]]></name>
+		<identifie><![CDATA[ilotteryv1]]></identifie>
+		<version><![CDATA[2.0]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[幸运大抽奖v1]]></ability>
+		<description><![CDATA[幸运大抽奖v1]]></description>
+		<author><![CDATA[迷失卍国度]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+	</bindings>
+	<install><![CDATA[
+    DROP TABLE IF EXISTS `ims_ilotteryv1_user`;
+    CREATE TABLE `ims_ilotteryv1_user` (
+        `id` int(10) NOT NULL AUTO_INCREMENT,
+        `rid` int(11) NOT NULL DEFAULT '0',
+        `weid` int(10) NOT NULL DEFAULT '0',
+        `from_user` varchar(50) NOT NULL DEFAULT '',
+        `username` varchar(50) NOT NULL DEFAULT '',
+        `mobile` varchar(20) NOT NULL DEFAULT '',
+        `status` tinyint(1) NOT NULL DEFAULT '0',
+        `level` tinyint(1) NOT NULL DEFAULT '0',
+        `default_user` tinyint(1) NOT NULL DEFAULT '0',
+        `default_level` tinyint(1) NOT NULL DEFAULT '3',
+        `dateline` int(10) NOT NULL DEFAULT '0',
+        PRIMARY KEY (`id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+    DROP TABLE IF EXISTS `ims_ilotteryv1_reply`;
+    CREATE TABLE `ims_ilotteryv1_reply` (
+        `id` int(10) NOT NULL AUTO_INCREMENT,
+        `rid` int(10) NOT NULL DEFAULT '0',
+        `weid` int(10) NOT NULL DEFAULT '0',
+        `title` varchar(50) NOT NULL,
+        `description` text NOT NULL,
+        `picture` varchar(200) NOT NULL DEFAULT '',
+        `is_change` tinyint(1) NOT NULL DEFAULT '0',
+        `only_default_user` tinyint(1) NOT NULL DEFAULT '0',
+        `starttime` int(10) NOT NULL DEFAULT '0',
+        `endtime` int(10) NOT NULL DEFAULT '0',
+        `dateline` int(10) NOT NULL DEFAULT '0',
+        PRIMARY KEY (`id`)
+    ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+    ]]></install>
+	<uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

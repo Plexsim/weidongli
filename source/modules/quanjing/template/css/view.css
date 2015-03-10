@@ -1,0 +1,54 @@
+body, div, p, ul, ol, li, textarea, form, input, h1, h2, h3, h4, h5, dl, dt, dd, img, section, article, aside, header, footer, nav, figure, hgroup{
+	margin:0;
+	padding:0;
+}
+html, body{
+	height:100%;
+}
+body{
+	background-color:#f2f1f0;
+	font-family:"\5FAE\8F6F\96C5\9ED1", Helvetica,serif;
+	min-width:320px;
+	-webkit-text-size-adjust:none;
+	font-size:13px;
+	color:#5b5b5b;
+	overflow-x:hidden;
+}
+ul, ol, li{
+	list-style:none;
+}
+a{
+	text-decoration:none;
+	color:#5b5b5b;
+}
+img{
+	border:0;
+}
+
+/*.view_full{width: 100%; height: 100%; z-index:1; min-width: 320px; background: url(/source/modules/quanjing/template/css/bg.jpg);background-size:cover; position:relative;}*/
+
+.view_list{background-color: rgba(0,0,0,0.6); width: 95%; padding: 0px 0;}
+.view_list h3{ display: -webkit-box; margin: 15px 15px 0 10px; font-size: 16px; font-weight: normal; color: #ffffff; text-shadow: 1px 2px 0 rgba(0,0,0,0.8);}
+.view_list h3 em{ -webkit-box-flex:1; content: ""; display:block; height: 1px; background-color: rgba(0,0,0,0.3); margin: 12px 0 0 10px; /*box-shadow: 2px 1px 0 rgba(0,0,0,0.8);*/}
+
+.view_list ul{margin: 15px 0 0 20px; overflow: hidden;}
+.view_list li{float: left;}
+.view_list li a{display: block; margin: 0 10px 15px 0; background-color: #4eb3d7; box-shadow: 3px 2px 0 rgba(0,0,0,0.8); font-size: 15px; text-align: center; color: #fff;}
+.view_list li a.current{background-color: #9dc838;}
+
+.view_house{
+	position: fixed; z-index: 30; bottom:20px; left: 0; width: 100%; text-align: center;
+}
+.view_house a{
+	display: inline-block; height: 32px; padding: 0 15px; background-color: rgba(0,0,0,0.6);
+	font-size: 14px; color: #fefefe; line-height: 32px; /*text-shadow: 1px 2px 0 rgba(0,0,0,0.4);*/
+}
+.view_select {
+	position: absolute;
+	z-index:20;
+	width: 100%;
+	top:0;	
+}
+
+
+

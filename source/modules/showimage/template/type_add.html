@@ -1,0 +1,39 @@
+{template 'common/header'}
+<ul class="nav nav-tabs">
+    <li {if $operation == 'manage'}class="active"{/if} ><a href="{php echo create_url('site/module/type', array('name' => 'showimage', 'op' => 'manage'));}">管理</a></li>
+    <li {if $operation == 'add'}class="active"{/if}><a href="{php echo create_url('site/module/type', array('name' => 'showimage', 'op' => 'add'));}">添加</a></li>
+</ul>
+
+<div class="main">
+<form action="" class="form-horizontal form" method="post" enctype="multipart/form-data" onsubmit="return checkform()">
+    <h4>添加分类</h4>
+    <table class="tb">
+        <tr>
+            <th><label for="">分类名称</label></th>
+            <td>
+                <input type="text" clas="span3" name="title" value="{$item['title']}"/>
+                <span class="help-block"></span>
+            </td>
+        </tr>
+        <tr>
+            <th><label for="">分类所属效果</label></th>
+            <td>
+                <select name="model">
+                    <option value="1">效果一</option>
+                    <option value="2">效果二</option>
+                </select>
+                <span class="help-block"></span>
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <button type="submit" class="btn btn-primary span3" name="submit" value="提交">提交</button>
+                <input type="hidden" name="add_id" value="{$item['id']}"/>
+                <input type="hidden" name="token" value="{$_W['token']}" />
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+{template 'common/footer'}

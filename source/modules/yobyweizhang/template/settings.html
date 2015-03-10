@@ -1,0 +1,78 @@
+{template 'common/header'}
+<div class="main">
+	<form action="" method="post" class="form-horizontal form">
+		<h4>参数设置</h4>
+		<table class="tb">
+			<tr>
+				<th>默认城市</th>
+				<td>
+				
+					<span class="help-block">当前默认城市:(<span style='color:red'>{$settings['city']}</span>)</span>
+				</td>
+			</tr>
+		
+			<tr>
+				<th>修改默认城市</th>
+				<td>
+				
+					<select id='pro' >
+				<option value=''>请选择省份</option>
+				{loop $arr $list}
+				<option value='{$list[0]}'>{$list[0]}</option>
+				{/loop}
+				</select>			
+				<select name='city' id='city'>
+				</select>
+					<span class="help-block">修改后记得保存哦</span>
+				</td>
+			</tr>
+			<tr>
+			<tr>
+				<th>聚合平台key</th>
+				<td>
+				<input type="text" class="span6" placeholder="" name="kkk" value="{$settings['kkk']}">
+					<span class="help-block">请填写聚合平台app key<a href="http://www.juhe.cn/" target="_blank">申请聚合平台KEY</a></span>
+				</td>
+			</tr>
+						<tr>
+				<th>查询地址1</th>
+				<td>
+				<input type="text" class="span8" placeholder=""  value="{$site1}">
+					<span class="help-block">用于文本回复查询</span>
+				</td>
+			</tr>
+						<tr>
+				<th>查询地址2</th>
+				<td>
+				<input type="text" class="span8" placeholder=""  value="{$site2}">
+					<span class="help-block">用于菜单查询</span>
+				</td>
+			</tr>
+			<tr>			
+				<th></th>
+				<td>
+					<input name="submit" type="submit" value="提交" class="btn btn-primary span3" />
+					<input type="hidden" name="token" value="{$_W['token']}" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script>
+$(function(){
+$('#pro').change(function(){
+ $("#city").empty();
+var pro = $("#pro").val();
+    $.getJSON('member.php?act=module&do=setting&mid=74&ajax=1&pro='+pro+'&token={$_W['token']}',function(data){
+    $.each(data, function(i, item) {
+                $("<option></option>")
+                    .val(item.cid)
+                    .text(item.text)
+                    .appendTo($("#city"));
+            });
+    });
+})
+
+});
+</script>
+{template 'common/footer'}

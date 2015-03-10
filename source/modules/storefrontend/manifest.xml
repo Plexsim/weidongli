@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.52">
+	<application setting="true">
+		<name><![CDATA[应用商店]]></name>
+		<identifie><![CDATA[storefrontend]]></identifie>
+		<version><![CDATA[2.1.2]]></version>
+		<type><![CDATA[business]]></type>
+		<ability><![CDATA[应用商店，模块应有尽有，一键安装，在线升级，自动备份，秒速回滚。提供各种开源官方分支代码。]]></ability>
+		<description><![CDATA[]]></description>
+		<author><![CDATA[晓楚]]></author>
+    <url><![CDATA[http://blog.csdn.net/maray]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="false" />
+	</platform>
+	<bindings>
+		<menu>
+			<entry title="应用商店" do="app" />
+		</menu>
+    </bindings>
+	<install><![CDATA[
+CREATE TABLE IF NOT EXISTS `ims_app_upgrade_log` (
+  `logid` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
+  `url` varchar(10240)  NOT NULL,
+  `createtime` int(11) NOT NULL,
+  PRIMARY KEY (`logid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+    ]]></install>
+  <uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>

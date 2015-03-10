@@ -1,0 +1,126 @@
+<html><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="./source/modules/ilotteryv1/template/css/card.css" media="all">
+    <script type="text/javascript" src="./source/modules/ilotteryv1/template/js/zepto.js"></script>
+    <script type="text/javascript" src="./source/modules/ilotteryv1/template/js/jQuery.js"></script>
+    <!--<script type="text/javascript" src="./source/modules/ilotteryv1/template/js/bootstrap_datepicker_card.js"></script>-->
+    <title>个人资料</title>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta name="format-detection" content="telephone=no">
+</head>
+<body id="carduser" ondragstart="return false;" onselectstart="return false;">
+    <section class="body">
+    <div class="qiandaobanner">
+        <img src="./source/modules/ilotteryv1/template/images/user.jpg">
+    </div> 
+    <div class="cardexplain">
+        <ul class="round">
+        <form action="javascript:;" method="post">
+            <li class="title mb"><span class="none">用户资料</span></li>
+            <li class="nob">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+                    <tbody>
+                    <tr>
+                        <th>真实姓名</th>
+                        <td>
+                            <input name="username"  type="text" class="px" id="username" value="{$user[username]}" placeholder="请输入您的姓名" {if !empty($user) && $reply['is_change']==0}disabled{/if}>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </li>
+            <li class="nob">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="kuang">
+                    <tbody><tr>
+                        <th>联系电话</th>
+                        <td>
+                            <input name="mobile"  type="tel" class="px" value="{$user['mobile']}" id="mobile" placeholder="请输入您的电话" {if !empty($user) && $reply['is_change']==0}disabled{/if}></td>
+                    </tr>
+                </tbody></table>
+            </li>
+            {if $reply['is_change']==0}
+            <li class="nob">
+                <p><font color="red">注意: 本次活动报名后不允许修改用户资料哦，请认真填写.</font></p>
+            </li>
+            {/if}
+           </form>
+        </ul>
+        <div class="footReturn">
+            <a id="showcard" class="submit" href="javascript:void(0)">保 存</a>
+            <div class="window" id="windowcenter">
+                <div id="title" class="wtitle">系统提示<span class="close" id="alertclose"></span></div>
+                <div class="content">
+                    <div id="txt"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#showcard").click(function () {
+                var username = $("#username").val().trim();
+                var mobile = $("#mobile").val().trim();
+                var submitData = {
+                    username: username,
+                    mobile: mobile
+                };
+                if(username == ''){
+                    alert('没有输入用户名.');
+                    return false;
+                }
+                if(mobile == ''){
+                    alert('没有输入手机号码.');
+                    return false;
+                }
+                var flag = false;
+                {if $reply['is_change']==1}
+                    flag = true;
+                {else}
+                    {if empty($user)}
+                        flag = true;
+                    {else}
+                        flag = false;
+                    {/if}
+                {/if}
+                if(flag){
+                    $.post("{php echo create_url('mobile/module', array('do' => 'SaveUserinfo', 'from_user' => $page_from_user, 'name' => 'ilotteryv1', 'weid' => $weid, 'rid' => $rid))}", submitData,
+                            function (data) {
+                                if (data.message.state == 1) {
+                                    alert(data.message.msg);
+                                } else {
+                                    alert(data.message.msg);
+                                }
+                            },"json");
+                }else{
+                    alert('本次活动报名后不允许修改资料.');
+                }
+
+            });
+
+
+        });
+
+        $("#windowclosebutton").click(function () {
+            $("#windowcenter").slideUp(500);
+
+        });
+        $("#alertclose").click(function () {
+            $("#windowcenter").slideUp(500);
+
+        });
+
+        function alert(title) {
+            $("#windowcenter").slideToggle("slow");
+            $("#txt").html(title);
+            setTimeout('$("#windowcenter").slideUp(500)', 4000);
+        }
+
+        function alertToUrl(title,url){
+            if(url == '')url = window.location.href;
+            $("#windowcenter").slideToggle("slow");
+            $("#txt").html(title);
+            setTimeout("window.location.href='"+url+"'",1000);
+        }
+    </script>
+	</section>
+</body></html>

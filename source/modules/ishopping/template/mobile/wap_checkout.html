@@ -1,0 +1,58 @@
+{template wap_header}
+<script type='text/javascript' src='./source/modules/ishopping/style/js/shop.js'></script>
+<link href='./source/modules/ishopping/style/css/cart.css' rel='stylesheet' type='text/css' />
+<script language="javascript">$(document).ready(shop_obj.checkout_init);</script>
+<div id="shop_page_contents"><div id="cover_layer"></div>
+{template wap_menu}
+<div id="checkout">
+	<form id="checkout_form" action="{php echo $this->createMobileUrl('waporder');}">
+		<div class="address i-ture">
+			<h1 class="t">联系人信息</h1>
+			<ul>
+				{loop $addresslist $row}
+				<li>
+					<input type="radio" name="AId" value="{$row['id']}" checked id="address-{$row['id']}" />
+					<label for="address-{$row['id']}">【{$row['username']}，{$row['tel']}】</label>
+				</li>
+				{/loop}
+				<li><input type="radio" name="AId" id="new-address" value="0" {if empty($addresslist)} checked{/if}  /> <label for="new-address">使用新的联系人信息</label></li>
+			</ul>
+			<dl>
+				<dd>
+					姓名 <font class="fc_red">*</font><br />
+					<input type="text" name="username" value="" notnull  class="input_text"/>
+				</dd>
+				<dd>
+					手机 <font class="fc_red">*</font><br />
+					<input type="text" name="tel" value="" pattern="[0-9]*" notnull class="input_text"/>
+				</dd>
+				<dd>
+					地址 <font class="fc_red">*</font><br />
+					<input type="text" name="address" value="" notnull class="input_text"/>
+				</dd>				
+			</dl>
+		</div>
+				<div class="remark i-ture">
+			<h1 class="t">订单备注</h1>
+			<div><textarea name="Remark" placeholder="选填，填写您对本订单的特殊需求，如送货时间等" class="input_text"></textarea></div>
+		</div> 
+		<div class="total_price hide" >订单总价:<span class="fc_red"></span></div>
+		<div class="checkout"><input type="button" value="提交订单" /></div>
+		<input type="hidden" name="d" value="checkout" />
+	</form>
+</div></div>
+ {template wap_footer}
+<script type="text/javascript">
+    $('.input_text').focus(function() {
+        $("#footer_points").css("display","none");
+        $("#footer").css("display","none");
+        $("#category").css("display","none");
+    });
+    $('.input_text').blur(function() {
+        $("#footer_points").css("display","");
+        $("#footer").css("display","");
+        $("#category").css("display","");
+    });
+</script>
+</body>
+</html>

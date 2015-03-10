@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!--[if IE 6 ]> <html class="ie ie6 ie7 ie8"> <![endif]-->
+<!--[if IE 7 ]> <html class="ie ie7 ie8"> <![endif]-->
+<!--[if IE 8 ]> <html class="ie ie8"> <![endif]-->
+<!--[if IE 9 ]> <html class="ie ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html> <!--<![endif]-->
+<head>
+				<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta property='og:locale' content='zh_CN'/>
+	<meta property='og:type' content='article'/>
+	<meta property='og:title' content='云来·中国最大的移动APP云服务提供商'/>
+	<meta property='og:description' content='云来是一家拥有国内领先IOS、Android开发技术的移动APP开发商；拥有国际化运营团队的移动互联网营销解决方案提供商。'/>
+	<meta property='og:url' content='http://www.yunlai.cn/'/>
+	<meta property='og:site_name' content='云来，中国最大的移动APP云服务提供商'/>
+	<meta name='keywords' content='云来，场景应用'/>
+	<meta name="description" content="云来是一家拥有国内领先IOS、Android开发技术的移动APP开发商；拥有国际化运营团队的移动互联网营销解决方案提供商。" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="apple-touch-fullscreen" content="YES" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+	<meta HTTP-EQUIV="Expires" CONTENT="-1" />
+	<link rel="canonical" href="http://www.yunlai.cn/" />
+	<link href="/res/store/style/global.css?&versin=3" rel="stylesheet" type="text/css" />
+				<title>云来·中国最大的移动APP云服务提供商</title>
+	
+	<!-- IE6低版本兼容性样式-支持透明图片 -->
+	<!--[if lte IE 6]>
+		<script src="/res/store/script/DD_belatedPNG_0.0.8a-min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			DD_belatedPNG.fix('*');
+		</script>
+	<![endif]-->
+	<!-- IE6低版本兼容性样式-支持透明图片 end-->
+
+	<!--浏览器兼容HTML5标签-->
+	<!--[if lte IE 9]>
+		<script type="text/javascript" src="/res/store/script/html5.js"></script>
+	<![endif]-->
+	<!--浏览器兼容HTML5标签 end-->
+</head>
+<body class='s-bg-eee'>
+	<!--模版加载提示-->
+	<section class="m-aleat f-hide" style="position:absolute;z-index:-1;top:50%;left:50%;width:450px;height:300px;margin:-150px 0 0 -200px;text-align:center;font-size:24px;">
+		<strong style="font-size:30px;color:#666;">LiveApp，千万家企业的选择！</strong><br /><br />
+		<img src="/res/store/img/global/loading-green-160px.gif" alt='正在加载中....' />
+	</section>
+	<!--模版加载提示 end-->
+
+	<!-- g-header-头部 -->
+		<header class='g-hd s-bg01 s-bg-383'>
+		<!-- 头部内容 -->
+		<section class='m-headCon m-modle f-hght70'>
+			<h1 class='m-logo f-hght70'><a class='css_sprite s-bg-logo' href="/"></a></h1>
+			<nav class='m-gnb f-hght70 f-max960'>
+				<p class='menu-btn css_sprite s-bg-menuB f-cur'></p>
+				<div class='menu-con f-max960' data-open='false'>
+					<ul class='f-size14' data-menu-close='false' id="navMenu">
+						<li class='f-fl '><a href="/welcome">首页</a></li>
+						<li class='f-fl store_menu'><a href="/store"><em></em>LiveApp Store</a></li>
+						<li class='f-fl '><a href="/admin/myapp/applist?t_=1407559707">我的LiveApp</a></li>
+						<li class='f-fl '><a href="/help/index?t_=1407559707">帮助中心</a></li>
+										</ul>
+				</div>
+			</nav>
+			
+							<div class="m-user s-col-ccc">
+					<p class="user-login" id="loginBanner"></p>
+				</div>
+				
+				<div class='m-login-popup u-pupop01 s-bg-fff f-radius'>
+					<div class="bd">
+						<form id="ajaxLoginForm">
+						<table>
+							<colgroup>
+								<col width="60%" />
+								<col width="40%" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<td>
+										<p class='input'>
+											<span class='css_sprite02 s-bg-index-user'></span>
+											<input tabindex="1" type="text" placeHolder="账号" name="username" id="login_username" />
+										</p>
+									</td>
+									<td class="f-pad-l-25"> 
+										<span class='s-col-999'>还没帐号</span>&nbsp;<a class="s-col-txt01" href="/admin/user/register?t_=1407559707">马上注册</a>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p class='input'>
+											<span class='css_sprite02 s-bg-index-pas'></span>
+											<input tabindex="2" type="password" placeHolder="密码" name="password" id="login_password" onkeydown="enterLogin(event)" onfocus="$('#login_error').parent().addClass('f-hide');" />
+										</p>
+									</td>
+									<td class="f-pad-l-25"><a class="s-col-txt01" href="/admin/user/remeber?t_=1407559707">忘记密码</a></td>
+								</tr>
+								<tr>
+									<td><p class="u-btn02"><a href="javascript:void(0);" tabindex="3" onclick="sessionCtr.login();" >登录</a></p></td>
+									<td>&nbsp;</td>
+								</tr>
+							</tbody>
+						</table>
+						</form>
+						<div class="u-error f-hide">
+							<p class="f-tc" id="login_error">账号或密码，请重试</p>
+							<span class='css_sprite02'></span>
+						</div>
+					</div>
+				</div>
+					</section>
+		<!-- 头部内容 end-->
+	</header>
+	<script>
+	function enterLogin(e){
+	    if(e.keyCode == 13) {
+	    	sessionCtr.login();
+	    }
+	}
+	</script>
+		<!-- g-container-内容-->
+	<section class='g-ct'>
+		<!-- 404 -->
+		<section class='p-single f-radius f-max960'>
+			<div class='m-404 f-tc' style="position:relative;">
+				<h3 style="font-size:24px; margin-bottom:0; padding:0; padding-top:90px; color:#666; ">哎呀...你访问的页面不存在</h3>
+				<p style="font-size:15px;color:#666;line-height:30px;">原因：Unable to find a route to match the URI: template/22/assets/styles/0.5</p>
+				<div style="margin:0 auto;width:500px; height:280px; background:url('/res/store/img/global/img01_404.gif') no-repeat 0px -120pt;">
+				</div>
+			</div>
+		</section>
+		<!-- 404 end-->
+	</section>
+	<!-- g-container-内容 end -->
+			
+	<!-- APP初始化浮层 -->
+	<section class='m-loading m-loading-appstart f-tc s-col-fff f-hide'>
+		<div class="txt">
+			<strong></strong>
+			<span>
+				<img src="/res/store/img/global/loading-green-160px.gif" alt="loading" /><br />
+				<em>每个独一无二的创作都有一个新的开始.</em><br />
+				<em class='f-size18'>正在初始化…</em>
+			</span>
+		</div>
+		<p class='error f-hide'></p>
+	</section>
+	<!-- APP初始化浮层end -->
+
+		<!-- 侧边功能 -->
+	<section class="u-sideBar j-sideBar ">
+		<ul>
+			<li>
+				<a class="ask s-bg-hig f-tc s-col-fff" id="bqq" href='javascript:void(0)'>
+					<span class="css_sprite s-bg-ask"></span><span>咨询</span>
+				</a>
+			</li>
+			<li>
+				<a href="/welcome/problem" target="_blank" class="feedBack s-bg-hig s-col-fff f-tc">
+					<span class="css_sprite s-bg-feedBack"></span><span>反馈</span>
+				</a>
+			</li>
+			<li>
+				<a href="#none" class="tel400 s-bg-hig s-col-fff f-tc">
+					<span class="css_sprite s-bg-tel400"></span><span>400</span>
+					<strong class='s-bg-hig f-size18'>400 - 016 - 8906</strong>
+				</a>
+			</li>
+			<!-- <li>
+				<a href="#none" class="qr s-bg-hig s-col-fff f-tc">
+					<span class="css_sprite s-bg-tel400"></span><span>400</span>
+					<strong class='s-bg-hig f-size18'>4000-168-906</strong>
+				</a>
+			</li> -->
+		</ul>
+	</section>
+	<!-- 侧边功能 end-->
+					<!-- 二维码 -->
+			<section class="u-side-qr j-sideBar s-bg-hig f-radius ">
+				<a href="javascript:void(0)">
+					<span class='s-bg-siar-qr css_sprite'></span>
+					<span>公众号</span>
+					<em><img src="/res/store/img/global/img01_side-qr.jpg" alt="公众号" /></em>
+				</a>
+			</section>
+			<!-- 二维码 -->
+							<!-- 登陆状态轮询 end-->
+	
+	<!-- g-footer 页尾 -->
+	<footer class='g-ft f-tc f-pad-tb-25 s-col-999 s-bg-fff'>
+		<nav>
+			<a href="http://www.yunlai.cn/about">关于我们</a><span> - </span>
+			<a href="http://www.yunlai.cn/#contact">联系我们</a><span> - </span>
+			<a href="http://www.yunlai.cn/about">加入我们</a><span> - </span>
+			<a href="http://www.yunlai.cn" >云来首页</a><span> - </span>
+			<a href="/help/index?t_=1407559707">帮助中心</a><span> - </span>
+			<a href="/sitemap" >网站地图</a>
+		</nav>
+		<p>云来 版权所有 © 2012-2014 yunlai.cn All Rights Reserved <a href="http://www.miitbeian.gov.cn/" target="_blank">粤ICP备11054817号-3</a></p>
+			</footer>
+	<!-- g-footer 页尾 end -->
+	
+	<!--脚本加载-->
+	<script src="/res/store/script/1_jquery-1.8.2.min.js" type="text/javascript"></script>
+	<script src="/res/store/script/3_jquery.easing.1.3.js" type="text/javascript"></script>
+	<script src="/js/app/welcome/validemail.js?&versin=3"></script>
+	<script src="/js/app/welcome/clocktime.js?&versin=3"></script> <!-- 登录后长时间未操作自动退出提醒  js轮询 -->
+	<!-- IE8低版本兼容css3选择器-->
+	<!--[if (gte IE 6)&(lte IE 8)]>
+		<script type="text/javascript" src="/res/store/script/selectivizr.js?&versin=3"></script>
+	<![endif]-->
+	<!-- IE8低版本兼容css3选择器 end-->
+	<script src="/res/store/script/global.js?&versin=3" type="text/javascript"></script>
+			<!--脚本加载 end-->
+		<!-- js脚本 -->
+		<script src="http://wpa.b.qq.com/cgi/wpa.php" defer="defer"></script>
+	<script type="text/javascript">
+		// QQ在线询问加载
+		$(window).on('load',function(){
+			BizQQWPA.add({
+					aty: '1', // 接入到指定工号
+					a: '1001', // 指定工号 1001 接入
+					type: '1', // 使用按钮类型 WPA
+					nameAccount: '938011955', // 营销QQ号码
+					parent: 'bqq' // 将WPA放置在ID为testAdd的元素里
+			});
+			if($('#bqq2').length >= 1){
+				BizQQWPA.add({
+					aty: '1', // 接入到指定工号
+					a: '1001', // 指定工号 1001 接入
+					type: '1', // 使用按钮类型 WPA
+					nameAccount: '938011955', // 营销QQ号码
+					parent: 'bqq2' // 将WPA放置在ID为testAdd的元素里
+				});
+			}
+
+			var qqint = setInterval(function(){
+				var iframe = $('#bqq').find('iframe:last');
+				if (iframe.length > 0) {
+					clearInterval(qqint);
+					iframe.attr('id', 'qqbtn');
+					var eframe = document.getElementById('qqbtn');
+					eframe = eframe.contentWindow;
+					var btn = eframe.document.getElementById('launchBtn');
+					$(btn).css('height', '70px');
+				}
+			},100);
+		})
+	</script>
+	<script>
+(function() {
+	var hm = document.createElement("script");
+	hm.src = "http://hm.baidu.com/h.js?86c1a86bbb3b180f795d5674bf76f9e5";
+	var s = document.getElementsByTagName("script")[0];
+	s.parentNode.insertBefore(hm, s);
+})();
+</script>
+	</body>
+</html>	
+	

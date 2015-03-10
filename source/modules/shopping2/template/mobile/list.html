@@ -1,0 +1,94 @@
+{template 'header'}
+<link type="text/css" rel="stylesheet" href="./source/modules/shopping/images/common.css">
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner" style="padding:0 5px;">
+		<a class="btn btn-small btn-inverse pull-right" href="{php echo create_url('mobile/channel', array('name' => 'home', 'weid' => $_W['weid']))}"><i class="icon-user"></i> 个人中心</a>
+		<a class="btn btn-small btn-inverse pull-left" href="{php echo $this->createMobileUrl('mycart')}"><i class="icon-shopping-cart"></i> 我的购物车</a>
+		<a class="btn btn-small btn-inverse pull-left" href="{php echo $this->createMobileUrl('myorder')}"><i class="icon-reorder"></i> 我的订单</a>
+	</div>
+</div>
+
+<div class="list-main">
+	<div class="menu-button">
+		<ul class="unstyled">
+			<li><a style="text-align:left; padding:0; padding-left:10px; font-weight:bold; font-size:14px;"{if empty($_GPC['pcate']) && empty($_GPC['ccate'])} class="active"{/if} href="{php echo $this->createMobileUrl('list')}">全部</a><span class="img-circle"></span></li>
+		{loop $category $item}
+			<li><a style="text-align:left; padding:0; padding-left:10px; font-weight:bold; font-size:14px;"{if $item['id'] == $_GPC['pcate']} class="active"{/if} href="{php echo $this->createMobileUrl('list', array('pcate' => $item['id']))}">{$item['name']}</a><span class="img-circle"></span></li>
+			{loop $children[$item['id']] $citem}
+			<li><a{if $citem['id'] == $_GPC['ccate']} class="active"{/if} href="{php echo $this->createMobileUrl('list', array('ccate' => $citem['id']))}">{$citem['name']}</a><span class="img-circle"></span></li>
+			{/loop}
+		{/loop}
+		</ul>
+	</div>
+	<div class="menu-list">
+		<ul class="unstyled">
+			{loop $list $item}
+			<li>
+				<div class="pull-right">
+					<div class="img-circle menu-list-button add" onclick="order.add({$item['id']})">+</div>
+					<div class="menu-list-num" id="goodsnum_{$item['id']}"></div>
+					<div class="img-circle menu-list-button reduce" onclick="order.reduce({$item['id']});">-</div>
+				</div>
+				<div class="pull-left menu-pic">
+					<a href="{php echo $this->createMobileUrl('detail', array('id' => $item['id']))}"><img src="{$_W['attachurl']}{$item['thumb']}" class="img-rounded"></a>
+				</div>
+				<div class="pull-left menu-detail">
+					<span class="title"><a href="{php echo $this->createMobileUrl('detail', array('id' => $item['id']))}">{$item['title']}</a>{if $item['type'] == '2'}(虚拟){/if}</span>
+					<span class="click">{php echo cutstr($item['description'], 20)}</span>
+					<span class="price">{$item['marketprice']}元 {if $item['unit']} / {$item['unit']}{/if}</span>
+				</div>
+			</li>
+			{/loop}
+		</ul>
+		{$pager}
+	</div>
+	<input type="button" value="我的购物车" onclick="location.href = '{php echo $this->createMobileUrl('mycart')}'" class="btn btn-success" style="position:fixed; bottom:20px; right:20px;">
+</div>
+<script>
+function menuData(a) {
+	var a = $(a);
+	var e = 0;
+	var b = $('.menu-button li a:[class=active]').parent();
+	a.parent().parent().find('.menu-list-num').each(function(i) {
+		e = parseInt($(this).html()) + e;
+	});
+	if(b.find('.img-circle').html() == '') b.find('.img-circle').html(0);
+	b.find('.img-circle').html(e);
+	if(e != 0) {
+		b.find('.img-circle').show();
+	} else {
+		b.find('.img-circle').hide();
+	}
+	e = 0;
+}
+
+$(".menu-button").css({"position":"absolute", "top":"36px"});
+$(".list-main, .menu-button, .menu-list").height($(window).height()-36);
+var order = {
+	'add' : function(goodsid) {
+		var $this = this;
+		$this.cart(goodsid, 'add');
+	},
+	'reduce' : function(goodsid) {
+		var $this = this;
+		$this.cart(goodsid, 'reduce');
+	},
+	'cart' : function(goodsid, operation) {
+		if (!goodsid) {
+			alert('请选择商品！');
+			return;
+		}
+		operation = operation ? operation : 'add';
+		$.getJSON('{php echo $this->createMobileUrl('updatecart');}', {'op' : operation, 'goodsid' : goodsid}, function(s){
+			if (s.message.status) {
+				$('#goodsnum_'+goodsid).html(s.message.total);
+				menuData('#goodsnum_'+goodsid);
+			} else {
+				alert(s.message.message);
+			}
+		});
+	}
+};
+</script>
+{php $footer_off = 1;}
+{template 'footer'}

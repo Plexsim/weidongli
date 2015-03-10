@@ -1,0 +1,49 @@
+{template 'common/header'}
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data">
+		<h4>参数设置（www.faceplusplus.com.cn注册帐号，创建应用，获取api_key、api_secret）</h4>
+		<table class="tb">
+	    <tr>
+					<th>api_key</th>
+					<td>
+				        <input name="api_key"  value="{$api_key}" style="width:300px">
+					</td>
+				</tr>	
+                       
+			<tr>
+					<th>api_secret</th>
+					<td>
+					     <input name="api_secret" 
+						    value="{$api_secret}" style="width:300px">
+						
+				   </td>
+				</tr>
+				<tr>
+					<th>素材链接</th>
+					<td>
+					     <input name="link" 
+						    value="{$link}" style="width:300px">
+						
+				   </td>
+				</tr>
+				<tr>
+					<th>排行榜一页显示数量</th>
+					<td>
+					     <input name="number" 
+						    value="{$number}" style="width:300px">
+						
+				   </td>
+				</tr>			
+		
+			
+		<tr>
+			<th></th>
+			<td>
+				<input name="submit" type="submit" value="提交" class="btn btn-primary span3">
+				<input type="hidden" name="token" value="{$_W['token']}" />
+			</td>
+		</tr>
+		</table>
+	</form>
+</div>
+{template 'common/footer'}

@@ -1,0 +1,96 @@
+{template 'common/header'}
+{php echo $this -> set_tabbar($action, $rid);}
+<div class="main">
+        <form action="" method="post" onsubmit="return check();" class="form-horizontal form" enctype="multipart/form-data">
+        <h4>{$title} -  <a href="{php echo create_url('site/module', array('do' => 'SetRule', 'name' => 'ilotteryv1', 'rid' => $rid));}" style="font-size:0.8em">入口设置</a></h4>
+        <input type="hidden" id="id" name="id" value="{$reply['id']}"/>
+		<table class="tb">
+            <tr>
+                <th><label for="">用户名</label></th>
+                <td>
+                    <input type="text" name="username" value="{$reply['username']}" id="username" class="span4" placeholder="请输入用户名"/>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="">联系电话</label></th>
+                <td>
+                    <input type="text" name="mobile" value="{$reply['mobile']}" id="mobile" class="span4" placeholder="请输入联系电话"/>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="">中奖状态</label></th>
+                <td>
+                    <label class="radio inline">
+                        <input type="radio" name="status" value="1" {if empty($reply)}checked="checked"{elseif $reply['status']==1}checked="checked"{/if} /> 已中奖
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="status" value="0" {if empty($reply)}checked="checked"{elseif $reply['status']==0}checked="checked"{/if} /> 未中奖
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="">中奖级别</label></th>
+                <td>
+                    <label class="radio inline">
+                        <input type="radio" name="level" value="1" {if empty($reply)}checked="checked"{elseif $reply['level']==1}checked="checked"{/if} /> 一等奖
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="level" value="0" {if empty($reply)}checked="checked"{elseif $reply['level']==2}checked="checked"{/if} /> 二等奖
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="level" value="0" {if empty($reply)}checked="checked"{elseif $reply['level']==3}checked="checked"{/if} /> 三等奖
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="" style="color:#f00">是否内定</label></th>
+                <td>
+                    <label class="radio inline">
+                        <input type="radio" name="default_user" value="1" {if empty($reply)}checked="checked"{elseif $reply['default_user']==1}checked="checked"{/if} /> 是
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="default_user" value="0" {if empty($reply)}checked="checked"{elseif $reply['default_user']==0}checked="checked"{/if} /> 否
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <th><label for="" style="color:#f00">内定级别</label></th>
+                <td>
+                    <label class="radio inline">
+                        <input type="radio" name="default_level" value="1" {if empty($reply)}checked="checked"{elseif $reply['default_level']==1}checked="checked"{/if} /> 一等奖
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="default_level" value="2" {if empty($reply)}checked="checked"{elseif $reply['default_level']==2}checked="checked"{/if} /> 二等奖
+                    </label>
+                    <label class="radio inline">
+                        <input type="radio" name="default_level" value="3" {if empty($reply)}checked="checked"{elseif $reply['default_level']==3}checked="checked"{/if} /> 三等奖
+                    </label>
+                </td>
+            </tr>
+			<tr>
+				<th></th>
+				<td>
+					<input name="submit" type="submit" value="提交" class="btn btn-primary span3">
+					<input type="hidden" name="token" value="{$_W['token']}" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript">
+        function check() {
+            if($.trim($('#username').val()) == '') {
+                message('没有输入用户名.', '', 'error');
+                return false;
+            }
+            if($.trim($('#mobile').val()) == '') {
+                message('没有输入联系电话.', '', 'error');
+                return false;
+            }
+            return true;
+        }
+        </script>
+<script type="text/javascript">
+    kindeditor($('.richtext-clone'));
+</script>
+{template 'common/footer'}

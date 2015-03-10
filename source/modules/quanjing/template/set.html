@@ -1,0 +1,87 @@
+<link type="text/css" rel="stylesheet" href="./resource/style/bootstrap.css">
+<link type="text/css" rel="stylesheet" href="./resource/style/font-awesome.css">
+<link type="text/css" rel="stylesheet" href="./resource/style/common.css?v=1384333270">
+<script type="text/javascript" src="./resource/script/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="./resource/script/bootstrap.js"></script>
+<script type="text/javascript" src="./resource/script/common.js?v=1384333270"></script>
+<script type="text/javascript" src="./resource/script/emotions.js"></script>
+<form class="form-horizontal form" action="" method="post" enctype="multipart/form-data">
+<style>
+.alert { font-family:"微软雅黑"; font-size:14px !important; font-weight:normal;}
+input.span7,
+textarea.span7,
+.uneditable-input.span7 {
+  width: 100%;
+  min-height:40px;
+}
+.reply-edit-cover{width:99%; background:#FFF; height:auto; margin-bottom:10px;}
+</style>
+<ul class="nav nav-tabs">
+	<li class=""><a href="{php echo create_url('site/module/list', array('name' => 'quanjing'));}">全景列表</a></li>
+    <li class=""><a href="{php echo create_url('site/module/create', array('name' => 'quanjing'));}">创建3D全景</a></li>
+    <li class="active"><a href="{php echo create_url('site/module/set', array('name' => 'quanjing'));}">全景配置</a></li>
+</ul>
+<div class="alert alert-block alert-new" style="width:98%; margin-top:10px;">
+	<h4 class="alert-heading">全景基本设置</h4>
+	<table style="width:100%">
+		<tbody>     
+			<tr>
+				<th width="13%" valign="top">列表背景图</th>
+				<td width="87%">
+					<div id="" class="uneditable-input reply-edit-cover">
+						<div class="detail">
+							<span class="pull-right">大图片建议尺寸：640像素 * 480像素</span>
+							<input type="button" id="card-picture" fieldname="picture" class="btn btn-mini reply-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+							<button type="button" class="btn btn-mini reply-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'card-picture-value')" style="{if empty($reply['picture'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+						</div>
+						{if !empty($info['picture'])}
+						<input type="hidden" name="picture" value="{$info['picture']}">
+						<div id="upload-file-view" class="upload-view">
+							<input type="hidden" id="card-picture-value" value="{$info['picture']}">
+							<img width="100" src="{$_W['attachurl']}{$info['picture']}">&nbsp;&nbsp;
+						</div>
+						{else}
+						<div id="upload-file-view"></div>
+						{/if}
+					</div>
+				</td>
+			</tr>
+            <tr>
+				<th valign="top">版权信息</th>
+				<td>
+					<input type="text" id="" class="span7" placeholder="" name="banquan" value="{$info['banquan']}">
+                    <div class="help-block">用于显示在列表底部的版权信息</div>
+				</td>
+			</tr>
+            <tr style="display:none">
+				<th valign="top">列表标题</th>
+				<td>
+					<input type="text" id="" class="span7" placeholder="" name="title" value="{$info['title']}">
+				</td>
+			</tr>
+            <tr>
+				<th valign="top">链接</th>
+				<td>
+					<input type="text" id="" class="span7" placeholder="" name="url" value="{php echo $_W[siteroot].create_url('index/module/userlist', array('name' => 'quanjing','weid'=>$weid));}">
+				</td>
+			</tr>
+            <tr>
+				<th valign="top"></th>
+				<td>
+				  <button type="submit" class="btn btn-primary span3" name="submit" value="提交">提交</button>
+                    <input type="hidden" name="action" value="set">
+                    <input type="hidden" name="set_id" value="{$info['id']}">
+                    <input type="hidden" name="weid" value="{$weid}">
+				</td>
+			</tr>
+ 		</tbody>
+	</table>
+ </div>
+<script type="text/javascript">
+kindeditorUploadBtn($('#card-picture'));
+kindeditor($('.richtext-clone'));
+	$('.reply-edit-cover-upload').each(function(){
+		kindeditorUploadBtn($(this));
+	});
+</script>
+</form>

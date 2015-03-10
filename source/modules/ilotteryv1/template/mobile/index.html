@@ -1,0 +1,180 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>幸运大抽奖</title>
+    <link rel="stylesheet" type="text/css" href="./source/modules/ilotteryv1/template/css/main.css?v={date('Y-m-d',TIMESTAMP)}">
+    <style type="text/css">
+        #stop {
+            display: none
+        }
+        dd {
+            font-size: 16px;
+        }
+        .cursor {
+            cursor: hand;
+        }
+    </style>
+    <script type="text/javascript" src="./source/modules/ilotteryv1/template/js/jQuery.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var _gogo;
+            var start_btn = $("#start");
+            var stop_btn = $("#stop");
+            setInterval(function () {
+                $.getJSON("{php echo create_url('mobile/module', array('do' => 'GetUserCount', 'name' => 'ilotteryv1', 'rid' => $rid, 'weid' => $weid))}", function (json) {
+                    if (json) {
+                        var usercount = json.usercount;
+                        var lotterycount = json.lotterycount;
+                        $("#usercount").html(usercount);
+                        $("#lotterycount").html(lotterycount);
+                    }
+                });
+            }, 1000 * 10);
+
+            start_btn.click(function () {
+                $.getJSON("{php echo create_url('mobile/module', array('do' => 'lottery', 'name' => 'ilotteryv1', 'rid' => $rid, 'weid' => $weid))}", function (json) {
+                    if (json) {
+                        var len = json.length;
+                        _gogo = setInterval(function () {
+                            if (!start_btn.is(":hidden")) {
+                                //start_btn.click();
+                                clearInterval(_gogo);
+                            }
+                            var num = Math.floor(Math.random() * len);
+                            var id = json[num].id;
+                            var username = json[num].username;
+                            var mobile = json[num].mobile;
+                            $("#username").html(username);
+                            $("#mobile").html(mobile);
+                            $("#mid").val(id);
+                        }, 100);
+                        stop_btn.show();
+                        start_btn.hide();
+                    } else {
+                        $("#username").html('已经没有可抽奖用户.');
+                        $("#mobile").html('');
+                    }
+                });
+            });
+
+            stop_btn.click(function () {
+                clearInterval(_gogo);
+                var award = $("input[name='award']:checked").val();
+                $.getJSON("{php echo create_url('mobile/module', array('do' => 'lottery', 'name' => 'ilotteryv1', 'rid' => $rid, 'weid' => $weid, 'action' => 'lottery'))}", {award: award}, function (data) {
+                    if (data.success ==1) {
+                        if (award == 1) {
+                            $("#result1").append('<dd>' + data.username + '(' + data.mobile + ')</dd>');
+                        } else if (award == 2) {
+                            $("#result2").append('<dd>' + data.username + '(' + data.mobile + ')</dd>');
+                        } else {
+                            $("#result3").append('<dd>' + data.username + '(' + data.mobile + ')</dd>');
+                        }
+                        $("#username").html(data.username);
+                        $("#mobile").html(data.mobile);
+                    } else {
+                        $("#username").html('没有相关用户');
+                        $("#mobile").html('');
+                    }
+                    stop_btn.hide();
+                    start_btn.show();
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="layout">
+    <div id="left">
+        <form method="post">
+            <div><div style="margin-left: 0px;display: {if $reply['only_default_user']==1}none;{else}block;{/if}">报名人数:<span id="usercount">{$usercount}</span> 已获奖人数:<span id="lotterycount">{$lotterycount}</span>
+                </div>
+            </div>
+            <ul>
+                <li><input name="award" type="radio" value="1" class="cursor" id="rad1"><label class="cursor"
+                                                                                               for="rad1">一等奖</label>
+                </li>
+                <li><input name="award" type="radio" value="2" class="cursor" id="rad2"><label class="cursor"
+                                                                                               for="rad2">二等奖</label>
+                </li>
+                <li><input name="award" type="radio" value="3" class="cursor" id="rad3" checked="true"><label
+                        class="cursor" for="rad3">三等奖</label></li>
+            </ul>
+            <p id="roll"><span id="username">幸运大抽奖</span><span id="mobile"></span></p>
+            <input type="hidden" id="mid" value="">
+            <a href="javascript:void(0);" class="btn" id="start"><img
+                    src="./source/modules/ilotteryv1/template/images/btn.png" width="443" height="68"></a>
+            <a href="javascript:void(0);" class="btn" id="stop"><img
+                    src="./source/modules/ilotteryv1/template/images/btn2.png" width="443" height="68"></a>
+        </form>
+    </div>
+    <div id="right">
+        <dl style="margin-top: 240px;" id="result1">
+            <dt>一等奖</dt>
+            {loop $userlist1 $user}
+            <dd>{$user['username']}
+                {if strlen($user['mobile']) >= 11}
+                {php $p = substr($user['mobile'],0,3).'****'.substr($user['mobile'],7,4);}
+                {php echo $p;}
+                {else}
+                ({$user['mobile']})
+                {/if}
+            </dd>
+            {/loop}
+        </dl>
+        <dl style="margin-top: 0px;" id="result2">
+            <dt>二等奖</dt>
+            {loop $userlist2 $user}
+            <dd>{$user['username']}
+                {if strlen($user['mobile']) >= 11}
+                {php $p = substr($user['mobile'],0,3).'****'.substr($user['mobile'],7,4);}
+                {php echo $p;}
+                {else}
+                ({$user['mobile']})
+                {/if}
+            </dd>
+            {/loop}
+        </dl>
+        <dl style="margin-top: 0px;" id="result3">
+            <dt>三等奖</dt>
+            {loop $userlist3 $user}
+            <dd>{$user['username']}
+                {if strlen($user['mobile']) >= 11}
+                {php $p = substr($user['mobile'],0,3).'****'.substr($user['mobile'],7,4);}
+                {php echo $p;}
+                {else}
+                ({$user['mobile']})
+                {/if}
+            </dd>
+            {/loop}
+        </dl>
+    </div>
+</div>
+<script>
+    $(document).keypress(function (e) {
+        if (e.ctrlKey && e.which == 13)
+            $("form").submit();
+        }
+    )
+    //键盘操作
+    $(document).keydown(function (event) {
+        var e = event || window.event;
+        var k = e.keyCode || e.which;
+        var start_btn = $("#start");
+        var stop_btn = $("#stop");
+        switch (k) {
+            case 32:
+                if (!start_btn.is(":hidden")) {
+                    start_btn.click();
+                } else {
+                    stop_btn.click();
+                }
+                break;
+        }
+        if (e.keyCode == 122) {
+            return true;
+        }
+        return false;
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+    <div class="det-ins-container J_Mod " data-modname="appInfo">
+      <div class="det-icon">
+        <a href="{php echo $this->createWebUrl('AppDetail', array('id'=>$item->id))}">
+          <img src="{php echo $item->thumb}">
+        </a>
+        <i class="icon-union-safe">Safe</i>
+      </div>
+      <div class="det-ins-data">
+        <div class="det-name">
+          <div class="det-name-int">{php echo $item->title}</div>
+          <div class="official-btn" id="J_GfHoverBtn" style="display: block;">
+            <div class="official-text">
+              {if empty($item->author)}佚名{else}
+              <a href="{php echo $this->createWebUrl('App', array('author'=>$item->author))}">{php echo $item->author}<a>
+              {/if}
+            </div>
+            <div class=" official-hover-box"><span class="out-corner">◆<span class="int-corner">◆</span></span></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="det-star-box">
+          <div class="com-star-lit-5-O det-ins-star"></div>
+          <div class="com-blue-star-num">5分</div>
+          <a class="det-comment-num" target="_blank" href="#tabs-3" id="J_DetCommentNum" hidefocus="true"><a target="_blank" href="#tabs-3" id="J_CommentCount" hidefocus="true">（查看评论）</a></a>
+          <div class="clear"></div>
+        </div>
+        <div class="det-insnum-line">
+          <style>
+                      </style>
+                      <div class="det-ins-num"><span class="label label-warning">{php echo $item->price > 0 ? $item->price .'元' : '限免'}</span></div>
+          <div class="det-insnum-dot">·</div><div id="J_AdvBox" class="label det-adv adv-btn">{php echo date('m月d日',$item->createtime)}更新</div>
+          <!--div class="det-insnum-dot">·</div><div id="J_AdvBox" class="det-adv adv-btn">INFO</div-->
+          <div class="det-type-box">
+            {if !empty($item->tags) }
+            <div class="det-type-tit">分类：</div>
+            {/if}
+            <?php $mytags = explode(',', $item->tags);?>
+            {loop $mytags $tag}
+            {if !empty($tag) }
+            <a href="{php echo $this->createWebUrl('App', array('tag'=>$tag))}" class="det-type-link" id="J_DetCate">{$tag}</a>
+            {/if}
+            {/loop}
+            <div class="clear"></div>
+            <i class="icon-union-safe">Safe</i>
+          </div>
+          <div class="clear"></div>
+        </div>
+      </div>
+      <div class="det-ins-btn-box">
+        <a class="det-ins-btn" href="{php echo $this->createWebUrl('Install', array('appid'=>$item->id, 'url'=>$item->url, 'rand'=>TIMESTAMP))}"></a>
+        <a class="det-down-btn" href="{php echo $this->createWebUrl('Download', array('appid'=>$item->id, 'url'=>$item->url, 'rand'=>TIMESTAMP))}" hidefocus="true"></a>
+      </div>
+      <div class="clear"></div> 
+    </div>
+

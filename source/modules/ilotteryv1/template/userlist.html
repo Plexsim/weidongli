@@ -1,0 +1,67 @@
+{template 'common/header'}
+{php echo $this -> set_tabbar($action, $rid);}
+<div class="main">
+    <form action="{php echo create_url('site/module', array('do' => 'readexcel', 'name' => 'ilotteryv1', 'rid' => $rid))}"
+          method="post" class="form-horizontal form" onsubmit="return formcheck(this)" enctype="multipart/form-data">
+        <h4>{$title} - <a
+                href="{php echo create_url('site/module', array('do' => 'SetRule', 'name' => 'ilotteryv1', 'rid' => $rid));}"
+                style="font-size:0.8em">入口设置</a></h4>
+        <label class="inline"><a class="btn btn-primary"
+                                 href="{php echo create_url('site/module', array('do' => 'userform', 'name' => 'ilotteryv1', 'rid' => $rid))}"><i
+                class="icon-plus"></i> 添加用户</a> <a class="btn btn-primary" onclick="return confirm('确认清空本次活动的抽奖状态吗？');return false;"
+                                                  href="{php echo create_url('site/module', array('do' => 'CleanState', 'name' => 'ilotteryv1', 'rid' => $rid))}"><i
+                class="icon-remove-sign"></i> 清空抽奖状态</a> <a class="btn btn-primary"
+                                                           href="{php echo create_url('site/module', array('do' => 'userexcel', 'name' => 'ilotteryv1', 'rid' => $rid))}">导出会员</a>
+            <font color="green">请选择要导入的XLS文件：</font>
+            <input type="file" name="fileexcel" id="fileexcel" class="input-file">
+            <input type="submit" name="submit" value="导入XLS" class="btn btn-primary">
+            数据格式：<a href="source/modules/ilotteryv1/example.xls">下载</a>
+            <input type="hidden" name="token" value="{$_W['token']}"/>
+        </label>
+        <div style="padding-top: 15px;">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:100px;">编号</th>
+                <th>微信ID</th>
+                <th style="width:50px;">用户名</th>
+                <th style="width:50px;">联系电话</th>
+                <th style="width:80px;">是否中奖</th>
+                <th style="width:80px;">是否内定</th>
+                <th style="width:80px;">创建时间</th>
+                <th style="width:90px;">操作</th>
+            </tr>
+            </thead>
+            <tbody id="level-list">
+            {loop $userlist $user}
+            <tr>
+                <td>{$user['id']}</td>
+                <td>{$user['from_user']}</td>
+                <td>{$user['username']}</td>
+                <td>{$user['mobile']}</td>
+                <td>{if $user['status']==1}<font color="green">已中{$user['level']}等奖</font>{else}<font
+                        color="red">未中奖</font>{/if}
+                </td>
+                <td>{if $user['default_user']==1}<font color="green">内定{$user['default_level']}等奖</font>{else}<font
+                        color="red">无</font>{/if}
+                </td>
+                <td>{php echo date('Y-m-d H:i:s', $user[dateline]);}</td>
+                <td>
+                    <a class="btn"
+                       href="{php echo create_url('site/module', array('do' => 'userform', 'name' => 'ilotteryv1', 'id' => $user['id'], 'rid' => $rid))}"><i
+                            class="icon-edit"></i></a>
+                    <a class="btn" onclick="return confirm('确认删除吗？');return false;"
+                       href="{php echo create_url('site/module', array('do' => 'userdelete', 'name' => 'ilotteryv1', 'id' => $user['id'], 'rid'=>$rid))}"><i
+                       class="icon-remove"></i></a>
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+            <tfoot>
+            </tfoot>
+        </table>
+        </div>
+    </form>
+    {$pager}
+</div>
+{template 'common/footer'}

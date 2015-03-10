@@ -1,0 +1,22 @@
+<div id="footer_points"></div>
+<footer id="footer">
+	<ul>
+		<li class="category"><a href="#">分类</a></li>
+		<li class="cart"><a href="{php echo $this->createMobileUrl('wlcart',array('weid' => $weid,'openid'=>$from))}">购物车</a></li>
+		<li class="member"><a href="{php echo $this->createMobileUrl('wlmember',array('weid' => $weid,'openid'=>$from))}">我的</a></li>
+		<li class="home"><a href="{php echo $this->createMobileUrl('wlindex',array('weid' => $weid,'openid'=>$from))}">首页</a></li>
+	</ul>
+</footer>
+<div id="category">
+	<div class="close"></div>
+	<dl>
+		{loop $category $item}
+		<dt><a href="{php echo $this->createMobileUrl('wllist', array('cateid' => $item['id'],'weid' => $weid,'openid'=>$from))}">{$item['name']}</a></dt>
+			{loop $children[$item['id']] $citem}
+			<dd><a  href="{php echo $this->createMobileUrl('wllist', array('cateid' => $citem['id'],'weid' => $weid,'openid'=>$from))}">&gt; {$citem['name']}</a></dd>
+			{/loop}	
+		{/loop}
+	</dl>
+</div>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta charset="utf-8" />
+<meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+<meta HTTP-EQUIV="expires" CONTENT="0">
+<meta name="apple-touch-fullscreen" content="yes" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta http-equiv="Expires" content="-1" />
+<meta http-equiv="pragram" content="no-cache" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/> 
+<title>{$huabao['title']}</title>
+<script src="http://api.html5media.info/1.1.4/html5media.min.js"></script>
+<script type="text/javascript">
+document.write('<div class="spinner">
+  <div class="dot1"></div>
+  <div class="dot2"></div>
+</div>');
+window.onload=function(){
+	var load = document.getElementById("spinner");
+	load.parentNode.removeChild(load);
+}
+</script>
+<!--移动端版本兼容 -->
+<script type="text/javascript">
+	if(/Android (\d+\.\d+)/.test(navigator.userAgent)){
+		var version = parseFloat(RegExp.$1);
+		if(version>2.3){
+			var phoneScale = parseInt(window.screen.width)/640;
+			document.write('<meta name="viewport" content="width=640, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
+		}else{
+			document.write('<meta name="viewport" content="width=640, target-densitydpi=device-dpi">');
+		}
+	}else{
+		document.write('<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">');
+	}
+	//微信去掉下方刷新栏
+	if(navigator.userAgent.indexOf('MicroMessenger') >= 0){
+		document.addEventListener('WeixinJSBridgeReady', function() {
+			//WeixinJSBridge.call('hideToolbar');
+		});
+	}
+	var comment_url="{php echo $this->createMobileurl('comment',array('id'=>$_GPC['id'],'iscomment'=>$list['iscomment']))}";
+	</script>
+<link rel="stylesheet" type="text/css" href="./source/modules/izc_lightbox/resource/24/assets/styles/app.min.css?ver=3.8"/>
+<link rel="stylesheet" type="text/css" href="./source/modules/huabao/template/mobile/css/swiper.css">
+<link rel="stylesheet" type="text/css" href="./source/modules/huabao/template/mobile/css/index.css">
+<link type="text/css" rel="stylesheet" href="./source/modules/huabao/template/mobile/css/manimation.css" />
+<link type="text/css" rel="stylesheet" href="./source/modules/huabao/template/mobile/js/fancybox/fancybox.css" />
+</head>
+<body>
+{if (($huabao['open'])&&($huabao['ostyle']==1))}
+<div id="mas">
+	<canvas id="cas" ></canvas>
+</div>  
+{/if}
+{if !empty($huabao['music'])}
+<!-- 背景音乐 -->
+	<header class="app-header">
+		<a href="javascript:void(0);" class="u-globalAudio">
+		<i class="icon-music"></i>
+		<audio src="{$huabao['music']}" autoplay="autoplay" loop="loop"></audio>
+		</a>
+	</header>
+{/if}
+
+<div class="swiper-container">
+	<!-- 滑动操作指示 -->
+	<div class="start"><strong></strong></div>
+	<!-- 主体 -->
+	<div class="swiper-wrapper">
+		{php $i = 0;}
+		{loop $result['list'] $row}
+		{php $i++}
+		<div class="swiper-slide slide{$i}" style="background: url('{$_W['attachurl']}{$row['attachment']}') no-repeat center center; background-size: 100% 100%;" {if !empty($row['url'])}onclick="javascript:window.location.href='{$row['url']}'"{/if}>
+			{loop $row['items'] $item}
+			{if ($item['type']==0)}
+			{php $size = GetImageSize($_W['attachurl'].$item['item']);}
+            		<div class="{$item['animation']}" style="height:{php echo $size[1]/10.08}%;width:{php echo $size[0]/6.4}%;top:{php echo $item['y']/10.08}%;left:{php echo $item['x']/6.40}%;-webkit-animation-delay:{$item['icemiao']}s;">{if $item['url']}{if ($item['url']=='#share')}<a href="javascript:$('#mcover').show()">{else}<a class="fancy iframe" href="{$item['url']}">{/if}<img src="{$_W['attachurl']}{$item['item']}" style="width:100%;height:100%;"/></a>{else}<img src="{$_W['attachurl']}{$item['item']}" style="width:100%;height:100%;"/>{/if}</div>
+			{/if}
+			{/loop}
+		</div>   
+		{/loop}
+	</div>
+</div>
+<script src="./source/modules/huabao/template/mobile/js/jquery.min.js"></script>
+<script src="./source/modules/huabao/template/mobile/js/swiper.min.js"></script>
+<script src="./source/modules/huabao/template/mobile/js/wechat.min.js"></script>
+<script src="./source/modules/huabao/template/mobile/js/fancybox/fancybox.js"></script>
+{if (($huabao['open'])&&($huabao['ostyle']==1))}
+<!-- 手指擦除效果 -->
+<script src="./source/modules/huabao/template/mobile/js/tapclip.min.js"></script>
+<script type="text/javascript">
+var canvas = document.getElementById("cas"),ctx = canvas.getContext("2d");
+var x1,y1,a=20,timeout,totimes = 100,jiange = 20;
+canvas.width = document.getElementById("mas").clientWidth;
+canvas.height = document.getElementById("mas").clientHeight;
+var img = new Image();
+img.src = "{$_W['attachurl']}{$huabao['open']}";
+img.onload = function(){
+	ctx.drawImage(img,0,0,canvas.width,canvas.height)
+	tapClip()
+}
+</script>
+{/if}
+<script type="text/javascript">
+<!-- 滑动 -->
+var mySwiper = new Swiper('.swiper-container',{
+	loop:{$huabao['isloop']},
+	mode:'vertical',
+	tdFlow: {
+		rotate :60,
+		depth: 150,
+	}
+})
+
+</script>
+<!-- 弹出层设置 -->
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".fancy").fancybox({
+		'width':'100%',
+		'height':'100%',
+		'margin':'0',
+		'padding':'0',
+		'scrolling':'yes',
+		'autoScale':'true',
+		'type':'iframe'
+	});
+});
+</script>
+<!-- 微信分享设置 -->
+<script type="text/javascript" src="./source/modules/izc_lightbox/style/src/WeixinApi.js?v=4.2" ></script>	
+ <script type="text/javascript">
+            // 开启Api的debug模式
+            // 给按钮增加click事件：请不要太纠结这个写法，demo而已
+        var addEvent = function(elId,listener){
+            document.getElementById(elId)
+                    .addEventListener('click',function(e){
+                        if(!window.WeixinApi || !window.WeixinJSBridge) {
+                            alert('请确认您是在微信内置浏览器中打开的，并且WeixinApi.js已正确引用');
+                            e.preventDefault();
+                            return false;
+                        }
+                        listener(this,e);
+                    },false);
+        };
+
+       
+        // 需要分享的内容，请放到ready里
+        WeixinApi.ready(function(Api) {
+            // 微信分享的数据
+           var wxData = {
+				"appId": "", // 服务号可以填写appId
+                "imgUrl" : '{$_W['attachurl']}{$huabao['icon']}',
+		        "desc" : '{$huabao['content']}',
+		        "title" : '{$huabao['title']}',
+		        "link" : 'http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}&wxref=mp.weixin.qq.com'
+		        };
+            // 分享的回调
+            var wxCallbacks = {
+                // 收藏操作是否触发回调，默认是开启的
+                favorite : false,
+                // 分享操作开始之前
+                ready : function() {
+                    // 你可以在这里对分享的数据进行重组
+                    //alert("准备分享");
+                },
+                // 分享被用户自动取消
+                cancel : function(resp) {
+                    // 你可以在你的页面上给用户一个小Tip，为什么要取消呢？
+                    alert("亲，这么好的东西怎么能不分享给好朋友呢！");
+                },
+                // 分享失败了
+                fail : function(resp) {
+                    // 分享失败了，是不是可以告诉用户：不要紧，可能是网络问题，一会儿再试试？
+                    alert("分享失败，可能是网络问题，一会儿再试试？");
+                },
+                // 分享成功
+                confirm : function(resp) {
+                    // 分享成功了，我们是不是可以做一些分享统计呢？
+                    window.location.href='{$huabao['share']}';
+                },
+                // 整个分享过程结束
+                all : function(resp,shareTo) {
+                    // 如果你做的是一个鼓励用户进行分享的产品，在这里是不是可以给用户一些反馈了？
+                    //alert("分享" + (shareTo ? "到" + shareTo : "") + "结束，感谢您的分享");
+                }
+            };
+
+            // 用户点开右上角popup菜单后，点击分享给好友，会执行下面这个代码
+            Api.shareToFriend(wxData, wxCallbacks);
+
+            // 点击分享到朋友圈，会执行下面这个代码
+            Api.shareToTimeline(wxData, wxCallbacks);
+
+            // 点击分享到腾讯微博，会执行下面这个代码
+            Api.shareToWeibo(wxData, wxCallbacks);
+
+            // iOS上，可以直接调用这个API进行分享，一句话搞定
+            Api.generalShare(wxData,wxCallbacks);
+
+            // 有可能用户是直接用微信“扫一扫”打开的，这个情况下，optionMenu、toolbar都是off状态
+            // 为了方便用户测试，我先来trigger show一下
+            // optionMenu
+            var elOptionMenu = document.getElementById('optionMenu');
+            elOptionMenu.click(); // 先隐藏
+            elOptionMenu.click(); // 再显示
+        });
+        </script>
+<div id="mcover" onClick="$(this).hide()"><img src="./source/modules/izc_lightbox/resource/26/data/images/weixin/weixin-share-guide.png"></div>
+<script type="text/javascript" src="./source/modules/izc_lightbox/resource/24/assets/scripts/init.min.js?ver=3.8"></script>
+<!--浏览量-->
+{php $num = $huabao['num']; $ids = $huabao['id']; pdo_update('huabao', array('num'=>$num+1), array('id'=>$ids));}
+</body>
+</html>

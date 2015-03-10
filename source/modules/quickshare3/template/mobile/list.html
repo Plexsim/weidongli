@@ -1,0 +1,37 @@
+{template 'header'}
+
+<link rel="stylesheet" type="text/css" href="./source/modules/quickshare3/template/mobile/reset.css?2014-02-25-10" media="all" />
+<link rel="stylesheet" type="text/css" href="./source/modules/quickshare3/template/mobile/common.css?2014-02-25-10" media="all" />
+<link rel="stylesheet" type="text/css" href="./source/modules/quickshare3/template/mobile/weimob-ui-1-1.css?2014-07-24-10" media="all" />
+<link rel="stylesheet" type="text/css" href="./source/modules/quickshare3/template/mobile/list-3.css?2014-07-25-11" media="all" />
+<script type="text/javascript" src="./themes/mobile/default/quickshare3/template/mobile/jQuery.js?2014-02-25-10"></script>
+<!--link rel="stylesheet" type="text/css" href="http:/9958.m.weimob.com/wm-xin-a/font-awesome.css?v=2014063022" media="all" /-->
+<style>
+  .weimob-list-item-all-title{
+    font-size:16px;
+    padding-top:5px;
+    line-height:20px
+  }
+
+.stay_banner{ width:96%; height:auto; overflow:hidden;margin:0px 2%}
+.stay_banner img{ width:100%; height:auto; display:block;}
+</style>
+<div class="weimob-page">
+  <div class="weimob-content">
+    <div class="weimob-list">
+      {data func="quickshare3_site_article" cid=$cid return="true" assign="result"}
+      {loop $result['list'] $row}
+      <a class="weimob-list-item" href="{$row['url']}">
+        <div class="stay_banner">
+          <div class="weimob-list-item-all-title">{$row['title']}</div>
+          <div class="weimob-list-item-fulltitle">{php echo date('Y-m-d', $row['createtime'])}</div>
+          {if !empty($row['thumb'])}<div><img src="{php echo strpos($row['thumb'], 'http://') === FALSE ? ($_W['attachurl']. $row['thumb']) : $row['thumb']}"/></div>{/if}
+          <div class="weimob-list-item-summary">{$row['description']}</div>
+        </div>
+      </a>
+      {/loop}
+    </div>
+  </div>
+</div> 
+{$result['pager']}
+{template 'footer'}

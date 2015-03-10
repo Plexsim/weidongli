@@ -1,0 +1,9 @@
+    <div class="det-intro-container">
+      <div id="more-intro-container" style="display:block">
+        {if empty($item->content)}
+          这个开发者很懒，什么都没留下。
+        {else}
+          {php echo $item->content}
+        {/if}
+      </div>
+    </div>

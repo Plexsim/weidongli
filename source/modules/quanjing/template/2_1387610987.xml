@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<panorama>
+  <view fovmode="0">
+    <start pan="0" tilt="0" fov="70"/>
+    <min pan="0" tilt="-90" fov="5"/>
+    <max pan="360" tilt="90" fov="120"/>
+  </view>
+  <autorotate speed="0.100" delay="3.0" returntohorizon="0.000" startloaded="1"/>
+  <input tilesize="500" tilescale="1.01335" tile0url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/images/2013/12/JxBIxziTvI997bY3z79YBBqXIX9XWI.jpg" tile1url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/images/2013/12/yhzbK91qLrt6D9TTj6zbDbkj6h9qh6.jpg" tile2url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/images/2013/12/JO89Aj8nSAaqQknhsS4qZ9z470O09N.jpg" tile3url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/images/2013/12/VUO9J58sHhXUphXjHHpJ00nBJQn95B.jpg" tile4url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/images/2013/12/ZkeE2bKqMMMwXaVeWAvMXnbEOeEQZQ.jpg" tile5url="http://yuanyingxi.sys172.pkulab.com/resource/attachment/images/2013/12/aPmcPCUEpX0c0gptxTXp1fGtzpxux0.jpg"/>
+  <userdata title="" description="" author="" datetime="" copyright="" source="" info="" comment=""/>
+  <control sensitifity="8" simulatemass="1" lockedmouse="0" lockedkeyboard="0" lockedwheel="0" invertwheel="0" speedwheel="1" dblclickfullscreen="0" invertcontrol="1"/>
+  <sounds/>
+</panorama>

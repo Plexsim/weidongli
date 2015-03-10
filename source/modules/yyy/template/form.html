@@ -1,0 +1,139 @@
+<input type="hidden" name="reply_id" value="{$reply['id']}" />
+<div class="alert alert-block alert-new">
+	<a class="close" data-dismiss="alert">×</a>
+	<h4 class="alert-heading">添加摇一摇活动</h4>
+	<table>
+		<tbody>
+			<tr>
+				<th>查看内容</th>
+				<td><a href="{php echo create_url('site/module/awardlist', array('name' => 'yyy', 'id' => $reply['rid']))}" target="_blank">查看中奖名单</a> 
+				<a href="{php echo create_url('site/module/bigscreen', array('name' => 'yyy', 'id' => $reply['rid']))}" target="_blank">查看大屏幕</a></td>
+			</tr>
+			<tr>
+				<th>活动图片</th>
+				<td>
+					<div id="" class="uneditable-input reply-edit-cover">
+						<div class="detail">
+							<span class="pull-right">图片建议尺寸：700像素 * 300像素</span>
+							<input type="button" id="yyy-picture" fieldname="picture{$namesuffix}" class="btn btn-mini reply-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+							<button type="button" class="btn btn-mini reply-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'yyy-picture-value')" style="{if empty($reply['picture'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+						</div>
+						{if !empty($reply['picture'])}
+						<input type="hidden" name="picture-old" value="{$reply['picture']}">
+						<div id="upload-file-view" class="upload-view">
+							<input type="hidden" id="yyy-picture-value" value="{$reply[picture]}">
+							<img width="100" src="{$_W['attachurl']}{$reply['picture']}">&nbsp;&nbsp;
+						</div>
+						{else}
+						<div id="upload-file-view"></div>
+						{/if}
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<th>大屏左则图片</th>
+				<td>
+					<div id="" class="uneditable-input reply-edit-cover">
+						<div class="detail">
+							<span class="pull-right">建议尺寸：280像素 * 470像素</span>
+							<input type="button" id="yyy-screenpic" fieldname="screenpic{$namesuffix}" class="btn btn-mini reply-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+							<button type="button" class="btn btn-mini reply-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'yyy-screenpic-value')" style="{if empty($reply['screenpic'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+						</div>
+						{if !empty($reply['screenpic'])}
+						<input type="hidden" name="screenpic-old" value="{$reply['screenpic']}">
+						<div id="upload-file-view" class="upload-view">
+							<input type="hidden" id="yyy-screenpic-value" value="{$reply[screenpic]}">
+							<img width="56" height="94" src="{$_W['attachurl']}{$reply['screenpic']}">&nbsp;&nbsp;
+						</div>
+						{else}
+						<div id="upload-file-view"></div>
+						{/if}
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>公众号二维码</th>
+				<td>
+					<div id="" class="uneditable-input reply-edit-cover">
+						<div class="detail">
+							<span class="pull-right">建议尺寸：280像素 * 280像素</span>
+							<input type="button" id="yyy-qrcode" fieldname="qrcode{$namesuffix}" class="btn btn-mini reply-edit-cover-upload" value="<i class='icon-upload-alt'></i> 上传" style="" />
+							<button type="button" class="btn btn-mini reply-news-edit-cover-remove" id="upload-delete" onclick="doDeleteItemImage(this, 'yyy-qrcode-value')" style="{if empty($reply['qrcode'])} display:none;{/if}"><i class="icon-remove"></i> 删除</button>
+						</div>
+						{if !empty($reply['qrcode'])}
+						<input type="hidden" name="qrcode-old" value="{$reply['qrcode']}">
+						<div id="upload-file-view" class="upload-view">
+							<input type="hidden" id="yyy-qrcode-value" value="{$reply[qrcode]}">
+							<img width="100" src="{$_W['attachurl']}{$reply['qrcode']}">&nbsp;&nbsp;
+						</div>
+						{else}
+						<div id="upload-file-view"></div>
+						{/if}
+					</div>
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<th>活动时间</th>
+				<td>
+					<input name="starttime"  value="{php echo date('Y-m-d H:i:s', $reply['starttime'])}" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss'})">-
+					<input name="endtime"  value="{php echo date('Y-m-d H:i:s', $reply['endtime'])}" onfocus="WdatePicker({dateFmt:'yyyy-M-d H:mm:ss'})">
+					<div class="help-block">用于图文显示的简介</div>
+				</td>
+			</tr>
+			
+
+			<tr>
+				<th>活动简介</th>
+				<td>
+					<textarea style="height:150px;" name="description" class="span7" cols="60">{$reply['description']}</textarea>
+					<div class="help-block">用于图文显示的简介</div>
+				</td>
+			</tr>
+			<tr>
+				<th>活动规则</th>
+				<td>
+					<textarea id="rule" style="height:150px;" name="rule" class="span7" cols="60">{$reply['rule']}</textarea>
+					<div class="help-block">活动的相关说明和活动奖品介绍。</div>
+				</td>
+			</tr>
+			<tr>
+				<th>活动模式</th>
+				<td>
+				<label class="radio inline"><input type="radio" name="ruletype" value="1" {if $reply['ruletype']} checked="checked"{/if} /> 总时长</label>
+				<label class="radio inline"><input type="radio" name="ruletype" value="0" {if !$reply['ruletype']} checked="checked"{/if} /> 总次数</label>
+				<input type="text" value="{$reply['shaketimes']}" style="width:60px" name="shaketimes" >
+				<div class="help-block">总时长为摇的时间,规定时间内摇最多次者胜,单位秒;
+				总次数为总次数时结束,最短时间摇到此数字者胜,单位次--暂不支持总时</div>
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<th>摇动间隔</th>
+				<td>
+					<input type="text" value="{$reply['shakespace']}" style="width:60px" name="shakespace" >
+					<div class="help-block">单位毫秒,摇动时间间隔,计算两次摇动的时间间隔,此值越大摇的时间越长</div>
+				</td>
+			</tr>
+			<tr>
+				<th>摇动强度</th>
+				<td>
+					<input type="text" value="{$reply['shakestrong']}" style="width:60px" name="shakestrong" >
+					<div class="help-block">摇动有效强度,此值越大就要越用力摇,不够用力就不算</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+</div>
+
+<script type="text/javascript" src="http://www.my97.net/DP/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript">
+kindeditor($('#rule'));
+kindeditorUploadBtn($('#yyy-picture'));
+kindeditorUploadBtn($('#yyy-qrcode'));
+kindeditorUploadBtn($('#yyy-screenpic'));
+</script>

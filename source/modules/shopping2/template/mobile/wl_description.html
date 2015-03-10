@@ -1,0 +1,17 @@
+{template wl_header} 
+<style>
+img{ 
+  max-width: 320px; 
+  height:auto; 
+  width:expression(this.width > 320 ? "100%" : this.width); 
+}
+</style>
+<link href='/source/modules/shopping/style/css/description.css?t=20140127' rel='stylesheet' type='text/css' />
+<div id="shop_page_contents">
+	<div id="cover_layer"></div>
+	{template wl_menu} 
+	<div id="description">
+		<div class="contents">{$goods['content']}</div>
+	</div>
+</div>
+{template wl_footer} 

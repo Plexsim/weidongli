@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.51">
+	<application setting="false">
+		<name><![CDATA[测测你未来孩子的长相]]></name>
+		<identifie><![CDATA[baby]]></identifie>
+		<version><![CDATA[0.5]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[测测你未来孩子的长相]]></ability>
+		<description><![CDATA[测测你未来孩子的长相]]></description>
+		<author><![CDATA[爆笑先生]]></author>
+		<url><![CDATA[]]></url>
+	</application>
+	<platform>
+		<subscribes>
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+	</platform>
+	<bindings>
+		<cover>
+			<entry title="测测你未来孩子的长相" do="index" state="" direct="false" />
+		</cover>
+	</bindings>
+	<install><![CDATA[]]></install>
+	<uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>
